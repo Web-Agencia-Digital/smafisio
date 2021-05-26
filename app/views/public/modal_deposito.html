@@ -1,0 +1,56 @@
+<div class="modal fade" id="modal-comprovante" style="z-index: 10000;" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Enviar comprovante</h4>
+            </div>
+            <div class="modal-body">
+
+                <form name="f-pagina" id="f-pagina" method="post"  enctype="multipart/form-data" action="[baseUri]/cliente/comprovante/" >                            
+                    <div class="modal-body">
+                        <p class="well  well-small">
+                            <i class="icon icon-info-sign"></i> 
+                            <strong>Efetue o depósito/transferência para uma das contas abaixo:</strong>
+                            <br />
+                            <small> Após efetuar depósito/transf você ainda precisa nos enviar um comprovante.</small>                        
+                        </p>
+                        [dadosDeposito]
+                        <div class="fakeipt">
+                            <br />
+                            <p class="well well-small">
+                                <i class="icon icon-upload"></i> 
+                                <strong>Enviar comprovante de depósito ou transferência bancária:</strong>
+                                <br />
+                                <small> Você pode enviar PDF ou imagens, utilize um scanner ou tire uma foto do comprovante!</small>
+                            </p>
+                            <div class="uploader blue">
+                                <input type="text" class="filename" readonly="readonly"/>
+                                <input type="hidden" name="pedido_id" value="[pedido_id]" />
+                                <input type="button" name="file" id="file" class="button" value="Selecionar"/>
+                                <input type="file" name="filedata"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-small btn-custom"><i class="fa fa-check"></i> Enviar Comprovante</button>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        $("input[type=file]").change(function () {
+            $(this).parents(".uploader").find(".filename").val($(this).val());
+        });
+        $("input[type=file]").each(function () {
+            if ($(this).val() == "") {
+                $(this).parents(".uploader").find(".filename").val("Nenhum arquivo selecionado...");
+            }
+        });
+    });
+</script> 

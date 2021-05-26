@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>[config_site_title] | Detalhes do Pedido #[pedido_id]</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="application-name" content="Plataforma Flux Shop">
+        <link rel="icon" type="image/png" sizes="16x16" href="[baseUri]/app/images/layout/favicon.png" />
+        <meta name="author" content="[config_site_title]">
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
+        <link href="js/jquery/bootstrap-3.3.6/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="js/jquery/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+        <link href="css/public/main.css" rel="stylesheet" />
+        <link href="css/default/fakeinput.css" rel="stylesheet" />    
+        <script src="js/jquery/jquery-1.11.3.min.js" type="text/javascript"></script>  
+        <script src="js/jquery/jquery-ui-1.9.2.js" type="text/javascript"></script> 
+        <link href="css/public/tema.php?bd=[config_color_bd]&bh=[config_color_bh]&cd=[config_color_cd]&ch=[config_color_ch]&bk=[config_color_bk]&bt=[config_color_top]" rel="stylesheet" type="text/css"/>  
+        <!--[if lt IE 9]>
+        <script src="js/jquery/html5shiv.js"></script>
+        <script src="js/jquery/respond.min.js"></script>
+        <![ endif ]-->     
+        <script src="js/public/ga.js" type="text/javascript"></script>
+    </head>
+    <body>
+        <?php include 'topo.html'; ?>
+        <div class="container">
+            <div id="main">
+
+                <ul class="breadcrumb">
+                    <li class="hidden-xs"><a href="[baseUri]/"><i class="fa fa-home"></i> Home</a></li>
+                    <li class="hidden-xs"><a  href="[baseUri]/cliente/"><i class="fa fa-user"></i> Área do Cliente</a></li>
+                    <li class="hidden-xs"><a href="[baseUri]/cliente/pedidos/"><i class="fa fa-gift"></i> Meus Pedidos</a></li>
+                    <li class="active"><a><i class="fa fa-asterisk"></i> Detalhes do Pedido #[pedido_id]</a></li>
+                </ul> 
+                <div class="panel panel-info">
+                    <div class="panel panel-custom">
+                        <div class="panel-heading">
+                            <h5 class="text-white"><i class="fa fa-shopping-basket fa-1x"></i> Itens do seu pedido #[pedido_id]</h5>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+
+                        <!--{loop:cart}-->
+                        <!--{<div class="col-md-12 col-xs-12 box-cart" id="cart.cart_id">}-->
+                        <!--{<span class="col-md-2 col-xs-12"><img id="div_foto_cart.cart_id" src="thumber.php?q=70&zc=2&w=60&h=40&src=fotos/cart.lista_foto" class="img-responsive" /></span>}-->
+                        <!--{<span class="col-md-6 col-xs-12">}-->
+                        <!--{<h4 class="product-name">cart.lista_title<small>cart.lista_atributo_ped</small></h4>}-->
+                        <!--{</span>}-->
+                        <!--{<span class="col-md-2 col-xs-12">}-->
+                        <!--{<input type="hidden" class="qtde form-control" name="cart_id" id="qtde_cart.cart_id" value="cart.item_qtde" />}-->
+                        <!--{<span class="input_qtde">cart.lista_qtde</span>}-->
+                        <!--{</span>}-->
+                        <!--{<span class="col-md-1 col-xs-12 mar-top-10">}-->
+                        <!--{<span>cart.lista_preco</span>}-->
+                        <!--{</span>}-->
+                        <!--{<span class="col-md-1 col-xs-12 mar-top-10">}-->
+                        <!--{<span>cart.lista_total</span>}-->
+                        <!--{</span>}-->
+                        <!--{</div>}-->
+                        <!--{end:cart}-->
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="update-nag text-right col-md-12">
+                                    <div class="update-split update-success"><i class="fa fa-gift fa-2x"></i></div>
+                                    <p class="update-text text-right"><strong>Produtos: </strong><span id="total_compra">R$ [lista_total]</span></p>                            
+                                </div>
+                                <div class="update-nag text-right col-md-12 hide">
+                                    <div class="update-split update-success"><i class="fa fa-percent fa-2x"></i></div>
+                                    <p class="update-text text-right"><strong>Taxas:  </strong><span id="pedido_acrescimos">R$ [pedido_acrescimos]</span></p>                            
+                                </div>
+                                <div class="update-nag text-right col-md-12 [showCupomDesconto]">
+                                    <div class="update-split update-success"><i class="fa fa-tag fa-2x"></i></div>
+                                    <p class="update-text text-right"><strong>Descontos: </strong><span id="total_compra">R$ [pedido_cupom_desconto]</span></p>                            
+                                    <p class="">Subtotal: R$ [pedido_total_produto_desconto]</p>
+                                </div>
+                                <div class="update-nag text-right col-md-12">
+                                    <div class="update-split update-success"><i class="fa fa-gift fa-2x"></i></div>
+                                    <p class="update-text text-right"><strong>Subtotal:</strong> R$ [pedido_total_produto_desconto]</p>
+                                </div>
+                                <div class="update-nag text-right col-md-12">
+                                    <div class="update-split update-success"><i class="fa fa-truck fa-2x"></i></div>
+                                    <p class="update-text text-right"><strong>Frete: </strong>R$ [pedido_frete]</p>
+                                </div>
+                                <div class="update-nag text-right col-md-12">
+                                    <div class="update-split"><i class="fa fa-dollar fa-2x"></i></div>
+                                    <p class="update-text text-right"><strong>Total a pagar: </strong>R$ <span id="total_compra">[pedido_total_frete]</span></p>
+                                    <p>
+                                        [pedido_pay_obs]
+                                        <span class="hide">[forma-pagto-cielo]</span> 
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-md-6 pull-left no-margin">
+                                <p  class="font-13">
+                                    <i class="fa fa-map-marker"></i><b> Local de [tipo_local]:</b> [endereco_title]
+                                    <br />
+                                    [endereco_rua], [endereco_num], [endereco_bairro], [endereco_cidade], [endereco_uf]. 
+                                    <br />
+                                    <strong> Prazo:</strong> [pedido_prazo] 
+                                    <br />
+                                    [endereco_telefone]
+                                    <br />
+                                    [endereco_horario]
+                                </p>
+                            </div>   
+                        </div>   
+                        <br>
+                        <div class="col-md-12">
+                            <br>
+                            <p class="alert alert-[pedstatus]">
+                                <strong>Status da Transação: [pedido_status]</strong> <br> 
+                                <small>Status do Pedido: [pedido_status]</small>
+                            </p>
+                        </div>
+                        <div class="col-md-12 [show-rastreio]">
+                            <p><b>Rastreio do Pacote - Código [pedido_codigo_rastreio]</b></p>
+                            [rastreio]
+                        </div>
+                        <div class="container text-center">
+                            <a href="[baseUri]/cliente/imprimir/[pedido_id]" target="_blank"
+                               type="button" class="btn btn-default ">
+                                <i class="fa fa-print"></i>
+                                Imprimir Pedido
+                            </a> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>    
+        <br /><br /><br /><br /><br />
+        <?php include 'footer.html'; ?>
+        <script type="text/javascript" src="js/jquery/jquery.mask.js"></script>        
+        <script src="js/public/carrinho.js" type="text/javascript"></script>        
+        <script type="text/javascript">
+            $(function () {
+                $('[data-toggle="tooltip"]').tooltip();
+            });
+        </script>  
+    </body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>[config_site_title] | Painel Administrativo</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script src="js/jquery/jquery-1.8.3.min.js" type="text/javascript"></script>
+        <script src="js/jquery/jquery-ui-1.9.2.js" type="text/javascript"></script>
+        <script src="js/jquery/stupidtable.js" type="text/javascript"></script>
+        <script src="js/admin/main.js" type="text/javascript"></script>
+        <script src="js/admin/area.js" type="text/javascript"></script>
+        <script src="js/jquery/bootstrap/js/bootstrap.js" type="text/javascript"></script>
+        <link href="js/jquery/bootstrap/css/bootstrap.css" rel="stylesheet" />
+        <link href="js/jquery/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" />
+        <link href="css/admin/main.css" rel="stylesheet" />
+    </head>
+    <body>
+        <div id="main">
+            <?php require_once 'menu_login.html'; ?>
+            <div class="row-fluid">
+                <div class="span2 pull-left">
+                    <?php require_once 'menu.html'; ?>
+                </div>               
+                <div class="span10 pull-right" id="sright">
+                    <div class="row-fluid">
+                        <div class="panel">
+                            <div class="accordion" id="add-area">
+                                <div class="accordion-group">
+                                    <div class="accordion-heading">
+                                        <a class="accordion-toggle panel-link" data-toggle="collapse" data-parent="#add-area" href="#collapseOne">
+                                            <i class="icon-plus-sign icon-white"></i>  <b>Cadastrar Nova área</b>
+                                        </a>
+                                    </div>
+                                    <div id="collapseOne" class="accordion-body collapse">
+                                        <div class="accordion-inner accordion-inner-inverse">
+                                            <form name="f-area" id="f-area" class="form mar-top-10" method="post" onSubmit="return valida()"
+                                                  action="[baseUri]/admin/area/incluir/">
+                                                <div class="input-prepend">
+                                                    <span class="add-on">Nome da área: </span>
+                                                    <input class="span6" name="area_title" id="area_title" type="text" placeholder="Título / Nome da área" />
+                                                    <button type="submit" class="btn btn-action" id="btn-add" data-loading-text="processando...">Cadastrar</button>
+                                                    <button type="button" class="btn cancel">Cancelar</button>
+                                                </div>
+                                            </form> 
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <table cellpadding="0" cellspacing="0" border="0" class="table tabler table-striped">
+                            <thead>
+                                <tr>
+                                    <th class="type-int" width="40px"><i class="icon-filter icon-white"></i> <b title="Ordenar por ID">ID</b></th>
+                                    <th class="type-string"><i class="icon-filter icon-white"></i> <b title="Ordenar por Categoria">Área</b></th>
+                                    <th  width="100px" class="type-string"><i class="icon-filter icon-white"></i> <b title="Ordenar por número de páginas">Páginas</b></th>
+                                    <th width="140px"><i class="icon-th icon-white"></i> <b title="Editar ou Remover área">Controles</b></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!--{loop:rs}-->
+                                <!--{<tr class="gradeX">}-->
+                                <!--{<td>rs.area_id</td>}-->
+                                <!--{<td>rs.area_title</td>}-->
+                                <!--{<td>(rs.area_page)</td>}-->
+                                <!--{<td>}-->
+                                <!--{<button class="btn btn-mini edit" id="rs.area_id" name="rs.area_title"><i class="icon-edit"></i> editar</button>}-->
+                                <!--{<button class="btn btn-mini remove" id="rs.area_id"><i class="icon-trash"></i> remover</button>}-->
+                                <!--{</td>}-->
+                                <!--{</tr>}-->
+                                <!--{end:rs}-->
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th style="text-align: right"><img src="images/icons/acurve.png" style="margin-top: -8px;"/> </th>
+                                    <th>[area_qtde]  &nbsp;áreas &nbsp;cadastradas</th>
+                                    <th>&nbsp;</th>
+                                    <th>&nbsp;</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                        <div class="pagination">
+                            <ul class="pull-right">
+                                <!--{pages}-->
+                            </ul>
+                        </div>
+                    </div>                    
+                </div>
+                <?php require_once 'footer.html'; ?>           
+            </div><!--end row-fluid-->             
+        </div> <!--end main-->
+
+        <div class="modal hide fade" id="modal-remove">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h5><img src="images/icons/alert.png" /> Remover área</h5>
+            </div>
+            <div class="modal-body">
+                <p>Você está prestes a remover uma area e suas páginas!</p>
+                <p>Deseja realmente prosseguir?</p>
+            </div>
+            <div class="modal-footer">
+                <a href="javascript:void(0);" onclick="$('#modal-remove').modal('hide')" class="btn btn-small">Cancelar</a>
+                <a href="javascript:void(0);" id="btn-remove" class="btn btn-small btn-danger">Confirmar Remoção</a>
+            </div>
+        </div>   
+        <script type="text/javascript">
+            $("#menu-pagina").addClass('active');
+            $("#pagina-area").addClass('active');
+            window.onload = function () {
+                [msgOnload]
+            }
+        </script>
+    </body>
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>[config_site_title] | Painel Administrativo</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script src="js/jquery/jquery-1.8.3.min.js" type="text/javascript"></script>
+        <script src="js/jquery/jquery-ui-1.9.2.js" type="text/javascript"></script>
+        <script src="js/admin/main.js" type="text/javascript"></script>
+        <script src="js/jquery/bootstrap/js/bootstrap.js" type="text/javascript"></script>
+        <link href="js/jquery/bootstrap/css/bootstrap.css" rel="stylesheet" />
+        <link href="js/jquery/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" />
+        <link href="css/admin/main.css" rel="stylesheet" />
+        <script src="js/jquery/jquery.price.js" type="text/javascript"></script>        
+        <script src="js/jquery/jquery.mask.js" type="text/javascript"></script>    
+        <script src="js/jquery/stupidtable.js" type="text/javascript"></script>
+        <script src="js/admin/cliente.js" type="text/javascript"></script>    
+        <script src="js/jquery/validate/jquery.validate.js" type="text/javascript"></script>        
+    </head>
+    <body>
+        <div id="main">
+            <?php require_once 'menu_login.html'; ?>
+            <div class="row-fluid">
+                <div class="span2 pull-left">
+                    <?php require_once 'menu.html'; ?>
+                </div>               
+                <div class="span10 pull-right" id="sright">
+                    <div class="row-fluid">
+                        <div class="panel">
+                            <div class="title-grid-inverse">
+                                <i class="icon-user icon-white"></i>  <b>Dados do Cliente - [cliente_nome] - Cadastrado em [cliente_datacad] </b>
+                            </div>
+                            <p>&nbsp;</p>
+                            <form id="f-cliente" name="f-cliente" method="post" class="validate" action="[baseUri]/admin/cliente/atualizar/">
+                                <p class="title-grid font-small" style="width:410px;margin-top: 10px !important;margin-bottom: 10px !important;">Dados Pessoais</p>
+                                <div class="input-prepend">
+                                    <span class="add-on">Nome</span>
+                                    <input type="text" name="cliente_nome" id="cliente_nome" class="required" placeholder="Nome Completo" 
+                                           value="[cliente_nome]" /> 
+                                </div>                                               
+                                <div class="input-prepend">
+                                    <span class="add-on">Sobrenome</span>
+                                    <input type="text" name="cliente_sobrenome" id="cliente_sobrenome" class="required" placeholder="Sobrenome" 
+                                           value="[cliente_sobrenome]" /> 
+                                </div>                                               
+                                <div class="input-prepend">
+                                    <span class="add-on">CPF</span>
+                                    <input type="text" name="cliente_cpf" id="cliente_cpf" class="required cpf"  placeholder="Informe seu CPF" 
+                                           value="[cliente_cpf]" /> 
+                                </div>                            
+                                <div class="input-prepend">
+                                    <span class="add-on">Data de Nascimento</span>
+                                    <input type="text" name="cliente_datan" id="cliente_datan" class="required datar"  placeholder="Informe sua data de nascimento" 
+                                           value="[cliente_datan]" /> 
+                                </div>                                                    
+
+                                <div class="input-prepend">
+                                    <span class="add-on">Telefone Fixo</span>
+                                    <input type="text" name="cliente_telefone" id="cliente_telefone" class="required fone" placeholder="Informe um telefone de contato" 
+                                           value="[cliente_telefone]"> 
+                                </div>                            
+
+                                <div class="input-prepend">
+                                    <span class="add-on">Celular ou Contato</span>
+                                    <input type="text" name="cliente_celular" id="cliente_celular"  placeholder="Informe um telefone móvel" 
+                                           value="[cliente_celular]" /> 
+                                </div>                            
+
+                                <div class="input-prepend">
+                                    <span class="add-on">E-mail</span>
+                                    <input type="text" name="cliente_email" id="cliente_email" value="[cliente_email]" />
+                                    <!-- <input class="input tips-top" title="O campo e-mail não pode ser alterado!" type="text" placeholder="[cliente_email]" >-->
+                                </div>       
+                                <div class="input-prepend">
+                                    <span class="add-on">Senha</span>
+                                    <input type="password" name="cliente_password" id="cliente_password" class="tips-right"  value=""
+                                           title="Informe a senha somente se desejar altera-la." placeholder="Informe sua senha" /> 
+                                </div>
+
+                                <input type="hidden" name="cliente_id" id="cliente_id" value="[cliente_id]"/>
+                                <button class="btn btn-small btn-success"><i class="icon-refresh icon-white"></i> Atualizar Dados do Cliente </button>
+                            </form>
+
+                            <!--{loop:addr}-->
+                            <!--{<form id="f-cliente" name="f-cliente" method="post" class="validate" action="[baseUri]/admin/cliente/enderecoAtualizar/">}-->
+                            <!--{<p class="title-grid font-small" style="width:410px;margin-top: 10px !important;margin-bottom: 10px !important;">Endereço: addr.endereco_title</p>}-->                                    
+                            <!--{<div class="input-prepend">}-->
+                            <!--{<span class="add-on">CEP</span>}-->
+                            <!--{<input type="text" name="endereco_cep" id="endereco_cep" class="cep required" maxlength="9" value="addr.endereco_cep" placeholder="informe seu cep" />}-->
+                            <!--{</div>}-->
+                            <!--{<div class="input-prepend">}-->
+                            <!--{<span class="add-on">Endereço</span>}-->
+                            <!--{<input type="text" name="endereco_rua" id="endereco_rua" class="required" value="addr.endereco_rua" placeholder="nome da rua/av/logradouro" />}-->
+                            <!--{</div>}-->
+                            <!--{<div class="input-prepend">}-->
+                            <!--{<span class="add-on">Número</span>}-->
+                            <!--{<input type="text" name="endereco_num" id="endereco_num" class="required" value="addr.endereco_num" placeholder="informe o número" />}-->
+                            <!--{</div>}-->
+                            <!--{<div class="input-prepend">}-->
+                            <!--{<span class="add-on">Complemento</span>}-->
+                            <!--{<input type="text" name="endereco_complemento" id="endereco_complemento" value="addr.endereco_complemento" placeholder="" />}-->
+                            <!--{</div>}-->
+                            <!--{<div class="input-prepend">}-->
+                            <!--{<span class="add-on">Bairro</span>}-->
+                            <!--{<input type="text" name="endereco_bairro" id="endereco_bairro" class="required" value="addr.endereco_bairro" placeholder="informe o nome do bairro" />}-->
+                            <!--{</div>}-->
+                            <!--{<div class="input-prepend">}-->
+                            <!--{<span class="add-on">Cidade</span>}-->
+                            <!--{<input type="text" name="endereco_cidade" id="endereco_cidade" class="required" value="addr.endereco_cidade" placeholder="informe o nome da cidade" />}-->
+                            <!--{<input type="hidden" name="endereco_id" id="endereco_id" value="addr.endereco_id" />}-->
+                            <!--{<input type="hidden" name="endereco_cliente" id="endereco_cliente" value="addr.endereco_cliente" />}-->
+                            <!--{</div>}-->
+                            <!--{<div class="input-prepend">}-->
+                            <!--{<span class="add-on">UF/Estado</span>}-->
+                            <!--{<input type="text" name="endereco_uf" id="endereco_uf" class="required" maxlength="2" value="addr.endereco_uf" placeholder="informe a UF / estado ex: SP" />}-->
+                            <!--{</div>}-->
+                            <!--{<button class="btn btn-small btn-success"><i class="icon-refresh icon-white"></i> Atualizar Endereço: addr.endereco_title</button>}-->                                    
+                            <!--{</form>}-->                                    
+                            <!--{end:addr}-->                                    
+                            <p style="margin-top: 40px;">
+                                <a href="[baseUri]/admin/cliente/" class="btn ">
+                                    <i style="margin-top: 2px" class="icon-briefcase"></i> Voltar pra Clientes</a>
+                                    
+<a href="[baseUri]/admin/cliente/imprimir/[cliente_id]/" class="btn btn-primary tips-top" title="imprimir" target="_blank"><i class="icon-white icon-print"></i> Imprimir Cadastro</a>                                    
+                            </p>
+                            <br />
+                        </div>                            
+                    </div>                                     
+                </div>
+            </div>
+            <?php require_once 'footer.html'; ?>         
+        </div> <!--end main-->
+        <script type="text/javascript">
+            $(function () {
+                $("#menu-cliente").addClass('active');
+                $("#cliente-lista").addClass('active');
+                window.onload = function () {
+                    [msgOnload]
+                }
+                // $('#f-cliente').find('input').attr('disabled', 'disabled');
+            });
+            [msg_error]
+
+            var graduacao = $('.graduacao').text();
+            if(graduacao == $('#opt-1').val()){
+                $('#opt-1').attr('selected', 'selected');
+            }if(graduacao == $('#opt-2').val()){
+                $('#opt-2').attr('selected', 'selected');
+            }if(graduacao == $('#opt-3').val()){
+                $('#opt-3').attr('selected', 'selected');
+            }if(graduacao == $('#opt-4').val()){
+                $('#opt-4').attr('selected', 'selected');
+            }if(graduacao == $('#opt-5').val()){
+                $('#opt-5').attr('selected', 'selected');
+            }if(graduacao == $('#opt-6').val()){
+                $('#opt-6').attr('selected', 'selected');
+            }if(graduacao == $('#opt-7').val()){
+                $('#opt-7').attr('selected', 'selected');
+            }
+        </script>          
+    </body>
+</html>

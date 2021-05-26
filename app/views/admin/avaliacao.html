@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>[config_site_title] | Painel Administrativo</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script src="js/jquery/jquery-1.8.3.min.js" type="text/javascript"></script>
+        <script src="js/jquery/jquery-ui-1.9.2.js" type="text/javascript"></script>
+        <script src="js/admin/main.js" type="text/javascript"></script>
+        <script src="js/jquery/bootstrap/js/bootstrap.js" type="text/javascript"></script>
+        <link href="js/jquery/bootstrap/css/bootstrap.css" rel="stylesheet" />
+        <link href="js/jquery/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" />
+        <link href="css/admin/main.css" rel="stylesheet" />
+        <script src="js/jquery/jquery.price.js" type="text/javascript"></script>        
+        <script src="js/jquery/jquery.mask.js" type="text/javascript"></script>    
+        <script src="js/jquery/stupidtable.js" type="text/javascript"></script>
+
+        <link href="css/default/bootstrap-switch.css" rel="stylesheet" />
+        <script src="js/jquery/bootstrap-switch.js" type="text/javascript"></script>
+        <link rel="stylesheet" href="js/jquery/jquery.gritter/css/jquery.gritter.css"  media="screen" type="text/css"/>
+        <script type="text/javascript" src="js/jquery/jquery.gritter/js/jquery.gritter.js"></script>
+    </head>
+    <body>
+        <div id="main">
+            <?php require_once 'menu_login.html'; ?>
+            <div class="row-fluid">
+                <div class="span2 pull-left">
+                    <?php require_once 'menu.html'; ?>
+                </div>    
+                <div class="span10 pull-right" id="sright">
+                    <div class="row-fluid">
+                        <div class="panel">
+                            <div class="title-grid-inverse">
+                                <i class="icon-star icon-white"></i>  <b>Avaliações Cadastradas </b>
+                            </div>
+
+                            <table cellpadding="0" cellspacing="0" border="0" class="table tabler table-striped">
+                                <thead>
+                                    <tr>
+                                        <th class="type-string"><i class="icon-filter icon-white"></i> <b title="Ordenar por Cliente">Cliente</b></th>
+                                        <th class="type-string"><i class="icon-filter icon-white"></i> <b title="Ordenar por Data">Data</b></th>
+                                        <th class="type-string"><i class="icon-filter icon-white"></i> <b title="Ordenar por Produto">Produto</b></th>
+                                        <th class="type-string"><i class="icon-filter icon-white"></i> <b title="Ordenar por Nota">Nota</b></th>
+                                        <th class="type-string"><i class="icon-filter icon-white"></i> <b title="Ordenar por Comentário">Comentário</b></th>
+                                        <th width="200px"><i class="icon-th icon-white"></i> <b title="Aprovar Comentário">Aprovado</b></th>
+                                    </tr>
+                                </thead>
+                                <tbody>                                        
+                                    <!--{loop:av}-->
+                                    <!--{<tr class="gradeX" id="tr-av.avaliacao_id">}-->
+                                    <!--{<td>av.cliente_nome av.cliente_sobrenome</td>}-->
+                                    <!--{<td>av.avaliacao_data</td>}-->
+                                    <!--{<td>ID av.item_id | av.item_title</td>}-->
+                                    <!--{<td>av.avaliacao_nota Estrelas</td>}-->
+                                    <!--{<td>av.avaliacao_comentario</td>}-->
+                                    <!--{<td>}-->
+                                    <!--{<input type="checkbox" class="make-switch" id="av.avaliacao_id" data-size='small'  name="switch" av.avaliacao_aprovado data-on-text="SIM" data-off-text="NÃO" data-on-color="primary" />}-->
+                                    <!--{<a class="btn btn-circle btn-info  atualizar" id="comentario" nome="av.cliente_nome" comentario="av.avaliacao_comentario" data-update="av.avaliacao_id"><i class="icon-edit icon-white"></i></a>}-->
+                                    <!--{<button class="btn btn-circle btn-danger  drop" data-id="av.avaliacao_id"><i class="icon-trash icon-white"></i></a>}-->
+                                    <!--{</td>}-->                                        
+                                    <!--{</tr>}-->
+                                    <!--{end:av}-->
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th style="text-align: left"><img src="images/icons/acurve.png" style="margin-top: -8px;"/>&nbsp;</th>
+                                        <th>&nbsp;</th>
+                                        <th>&nbsp;</th>
+                                        <th>&nbsp;</th>
+                                        <th>&nbsp;</th>
+                                        <th>&nbsp;</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                            <div class="pagination">
+                                <ul class="pull-right">
+                                    <!--{pages}-->
+                                </ul>
+                            </div> 
+                        </div>                            
+                    </div>                                     
+                </div>
+            </div>
+            <?php require_once 'footer.html'; ?>           
+        </div> <!--end main-->
+        <div class="modal hide fade" id="modal-remove">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h5><img src="images/icons/alert.png" /> Remover Cliente</h5>
+            </div>
+            <div class="modal-body">
+                <p>Você está prestes a remover um cliente e todos os seus pedidos!</p>
+                <p>Deseja realmente prosseguir?</p>
+            </div>
+            <div class="modal-footer">
+                <a href="javascript:void(0);" onclick="$('#modal-remove').modal('hide')" class="btn btn-small">Cancelar</a>
+                <a href="javascript:void(0);" id="btn-remove" class="btn btn-small btn-danger">Confirmar Remoção</a>
+            </div>
+        </div> 
+
+        <!--***************MODAL ATUALIZAR*****************-->
+
+        <div class="modal hide fade" id="modal-16">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h3 class="panel-title text-center">Editar Comentário</h3>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="area_nome">Nome do autor:</label>
+                    <input type="text" disabled="disabled" id="comentario_nome" name="comentario_nome" class="form-control"  required />
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Comentário</label>
+                    <textarea class="form-control" id="comentario_mensagem" name="comentario_mensagem"></textarea>
+                    <input type="hidden" id="comentario_id"  name="comentario_id">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="javascript:void(0);" class="btn btn-small" data-dismiss="modal" aria-hidden="true">Cancelar</a>
+                <button id="gravarcoments" type="button" class="btn btn-primary btn-small">Atualizar</button>
+            </div>
+        </div>  
+
+        <script type="text/javascript">
+            $("#menu-produto").addClass('active');
+            $("#produto-avaliacao").addClass('active');
+            var baseUri = $('base').attr('href').replace('/app/', '');
+            window.onload = function () {
+                [msgOnload]
+                $("[name='switch']").bootstrapSwitch();
+            }
+            $('input[class="make-switch"]').on('switchChange.bootstrapSwitch', function (event, state) {
+
+                var status = 0;
+                if (state == true)
+                {
+                    status = 1;
+                }
+
+                var idavaliacao = $(this).attr('id');
+                var url = baseUri + '/admin/pedido/setaprovacao/';
+
+                $.post(url, {
+                    idavaliacao: idavaliacao,
+                    status: status
+                }, function (data) {
+                    $.gritter.add({
+                        title: 'Procedimento Realizado',
+                        text: 'Comentário aprovado',
+                        class_name: 'success',
+                        before_open: function () {
+                            if ($('.gritter-item-wrapper').length == 1) {
+                                // prevents new gritter 
+                                return false;
+                            }
+                        }
+                    });
+
+                });
+            });
+
+            $('.drop').on('click', function () {
+                var id = $(this).attr('data-id');
+                var url = baseUri + '/admin/pedido/avaliacao_drop/';
+                $.post(url, {
+                    id: id
+                }, function (data) {
+                    console.log(data)
+                    $('#tr-' + id).fadeOut();
+                    $.gritter.add({
+                        title: 'Procedimento Realizado',
+                        text: 'Comentário Removido',
+                        class_name: 'success',
+                        before_open: function () {
+                            if ($('.gritter-item-wrapper').length == 1) {
+                                // prevents new gritter 
+                                return false;
+                            }
+                        }
+                    });
+                });
+            });
+
+            $('.atualizar').on('click', function () {
+                var id = $(this).attr('data-update');
+                var comentario = $(this).attr('comentario');
+                var nome = $(this).attr('nome');
+                $('#comentario').val(id);
+                //console.log(data);
+                $('#modal-16  #comentario_id').val(id);
+                $('#modal-16  #comentario_mensagem').val(comentario);
+                $('#modal-16  #comentario_nome').val(nome);
+                //$('#modal-16  #comentario_mensagem').val(data.comentario_mensagem);
+                $('#modal-16').modal('show');
+            });
+            $('#gravarcoments').on('click', function () {
+
+                var idavaliacao = $('#modal-16  #comentario_id').val();
+                var comentario = $('#modal-16  #comentario_mensagem').val();
+                var baseUri = $('base').attr('href').replace('/app/', '');
+                var url = baseUri + '/admin/pedido/updatecomentario/';
+                $.post(url, {
+                    idavaliacao: idavaliacao,
+                    comentario: comentario
+                }, function (data) {
+
+                    $('#modal-16').modal('hide');
+                    $.gritter.add({
+                        title: 'Procedimento Realizado',
+                        text: 'Comentário aprovado',
+                        class_name: 'success',
+                        before_open: function () {
+                            if ($('.gritter-item-wrapper').length == 1) {
+                                // prevents new gritter 
+                                return false;
+                            }
+                        }
+                    });
+                });
+            });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>[config_site_title] | Painel Administrativo</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script src="js/jquery/jquery-1.8.3.min.js" type="text/javascript"></script>
+        <script src="js/jquery/jquery-ui-1.9.2.js" type="text/javascript"></script>
+        <script src="js/admin/main.js" type="text/javascript"></script>
+        <script src="js/jquery/bootstrap/js/bootstrap.js" type="text/javascript"></script>
+        <link href="js/jquery/bootstrap/css/bootstrap.css" rel="stylesheet" />
+        <link href="js/jquery/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" />
+        <link href="css/admin/main.css" rel="stylesheet" />
+        <link href="js/jquery/colorpicker/css/bootstrap-colorpicker.min.css" rel="stylesheet">
+        <script src="js/jquery/jquery.price.js" type="text/javascript"></script>        
+        <script src="js/jquery/jquery.mask.js" type="text/javascript"></script>       
+        <script src="js/jquery/colorpicker/js/bootstrap-colorpicker.js"></script>
+        <link href="css/default/fakeinput.css" rel="stylesheet" />
+    </head>
+    <body style="overflow-x: hidden">
+        <div id="main">
+            <?php require_once 'menu_login.html'; ?>
+            <div class="row-fluid">
+                <div class="span2 pull-left">
+                    <?php require_once 'menu.html'; ?>
+                </div>                
+                <div class="span10 pull-right" id="sright">
+                    <div class="containe">
+
+                        <div class="panels panel-box" style="margin-top: 10px;">
+                            <div class="title-grid-inverse">
+                                <i class="icon-cog icon-white"></i>  <b>Logo e Favicon</b>
+                            </div>
+
+                            <div class="container">
+                                <div class="span6">
+                                    <form  class="form mar-top-10" method="post" style="padding:10px"
+                                           enctype="multipart/form-data"
+                                           action="[baseUri]/admin/configuracao/atualizarLogo/">
+                                        <div class="fakeipt">
+                                            <div class="uploader black">
+                                                <input type="text" class="filename" readonly="readonly"/>
+                                                <input type="button" name="file" id="file" class="button" value="Selecionar"/>
+                                                <input type="file" name="filedata" size="30"/>
+                                            </div>
+                                        </div>
+                                        <button type="submit" class="btn mar-top-10"><i class="icon-ok"></i> Atualizar</button>
+                                    </form>
+                                </div>
+                                <div class="span4">
+                                    <br>
+                                    <img src="[baseUri]/app/images/layout/logo.png?v=<?php echo rand(1,800);?>" class="img-responsive" alt="Logo" style="max-width: 350px"/>
+                                </div>
+                            </div>
+
+                            <div class="container">
+                                <div class="span6">
+                                    <form  class="form mar-top-10" method="post" style="padding:10px"
+                                           enctype="multipart/form-data"
+                                           action="[baseUri]/admin/configuracao/atualizarFav/">
+                                        <div class="fakeipt">
+                                            <div class="uploader black">
+                                                <input type="text" class="filename" readonly="readonly"/>
+                                                <input type="button" name="file" id="file" class="button" value="Selecionar"/>
+                                                <input type="file" name="filedata" size="30"/>
+                                            </div>
+                                        </div>
+                                        <button type="submit" class="btn mar-top-10"><i class="icon-ok"></i> Atualizar</button>
+                                    </form>
+                                </div>
+                                <div class="span4">
+                                    <br>
+                                    <img src="[baseUri]/app/images/layout/favicon.png?v=<?php echo rand(1,800);?>" class="img-responsive" alt="Logo" style="max-width: 350px"/>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                        <div class="panels panel-box" style="margin-top: 10px;">
+                            <div class="title-grid-inverse">
+                                <i class="icon-cog icon-white"></i>  <b>Conteúdo da Home</b>
+                            </div>
+
+                            <div class="container">
+                                <div class="spans6">
+                                    <form  class="form mar-top-10" method="post" style="padding:10px"
+                                           action="[baseUri]/admin/configuracao/atualizarAparencia/">
+
+                                            <input type="hidden" name="config_id" value="1" />
+                                           <label>Formato do site</label>
+                                           <select class="form-control" name="config_site_full" id="config_site_full">
+                                               <option value="">Layout Boxed</option>
+                                               <option value="-fluid">Layout Full</option>
+                                           </select>
+
+
+                                           <label>Depoimentos na Home</label>
+                                           <select class="form-control" name="config_site_depoimento" id="config_site_depoimento">
+                                               <option value="1">Sim</option>
+                                               <option value="0">Não</option>
+                                           </select>
+
+
+                                           <label>Todos os produtos na Home</label>
+                                           <select class="form-control" name="config_site_prodhome" id="config_site_prodhome">
+                                               <option value="1">Sim</option>
+                                               <option value="0">Não</option>
+                                           </select>
+                                            <br>
+
+                                        <button type="submit" class="btn mar-top-10"><i class="icon-ok"></i> Atualizar</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>                        
+
+
+                        <div class="panels panel-box" style="margin-top: 10px;">
+                            <div class="title-grid-inverse">
+                                <i class="icon-cog icon-white"></i>  <b>Cores da loja</b>
+                            </div>
+                            <div class="container">
+                                <div class="span10">
+                                    <form class="form mar-top-10" method="post" 
+                                          action="[baseUri]/admin/configuracao/atualizarTema/" style="padding: 10px;">
+                                        <input type="hidden" name="config_id" value="1" />
+                                        <div class="">
+                                            <h4>Tema Bootstrap (menu, botões e elementos): </h4>
+                                            <br>
+                                            <label>Background Padrão</label>
+                                            <div class="color-picker input-append colorpicker-component">
+                                                <input type="text" name="config_color_bd" value="[config_color_bd]" class="form-control" />
+                                                <span class="add-on"><i></i></span>
+                                            </div>                                    
+                                            <br>
+                                            <label>Background Ativo (hover)</label>
+                                            <div class="color-picker input-append colorpicker-component">
+                                                <input type="text" name="config_color_bh" value="[config_color_bh]" class="form-control" />
+                                                <span class="add-on"><i></i></span>
+                                            </div>                                    
+                                            <br>
+                                            <label>Cor Padrão</label>   
+                                            <div class="color-picker input-append colorpicker-component">
+                                                <input type="text" name="config_color_cd" value="[config_color_cd]" class="form-control" />
+                                                <span class="add-on"><i></i></span>
+                                            </div>  
+                                            <br>
+                                            <label>Cor Ativa (hover)</label>   
+                                            <div class="color-picker input-append colorpicker-component">
+                                                <input type="text" name="config_color_ch" value="[config_color_ch]" class="form-control" />
+                                                <span class="add-on"><i></i></span>
+                                            </div>     
+                                            <br>
+                                            <label>Cor de fundo do topo: </label>
+                                            <div class="color-picker input-append colorpicker-component">
+                                                <input type="text" name="config_color_top" value="[config_color_top]" class="form-control" />
+                                                <span class="add-on"><i></i></span> 
+                                            </div>                                                 
+                                            <!--
+                                        <div class="color-picker input-append colorpicker-component">
+                                            <input type="text" name="config_color_bk" value="[config_color_bk]" class="form-control" />
+                                            <span class="add-on"><i></i></span>
+                                        </div>  
+                                            -->
+                                        </div>
+                                        <br />
+                                        <button type="submit" class="btn" id="btn-add"><i class="icon-edit"></i> Atualizar</button>
+                                    </form> 
+                                </div>   
+                            </div>         
+                        </div>         
+                    </div>                                     
+                </div>
+            </div>
+            <?php require_once 'footer.html'; ?>          
+        </div> <!--end main-->
+        <script type="text/javascript">
+            $("#menu-config").addClass('active');
+            $("#config-tema").addClass('active');
+            window.onload = function () {
+                [msgOnload]
+                $('#config_site_menu').val('[config_site_menu]');
+                $('#config_site_prodhome').val('[config_site_prodhome]');
+                $('#config_site_full').val('[config_site_full]');
+                $('#config_site_depoimento').val('[config_site_depoimento]');
+
+            }
+
+            $(function () {
+                $('.color-picker').colorpicker();
+            });
+        </script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $("input[type=file]").change(function () {
+                    $(this).parents(".uploader").find(".filename").val($(this).val());
+                });
+                $("input[type=file]").each(function () {
+                    if ($(this).val() == "") {
+                        $(this).parents(".uploader").find(".filename").val("Nenhum arquivo selecionado...");
+                    }
+                });
+            });
+        </script>              
+    </body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>[config_site_title] | Identificação</title>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />     
+        <meta name="description" content="[config_site_description]">
+        <meta name="application-name" content="Plataforma Flux Shop">
+        <link rel="icon" type="image/png" sizes="16x16" href="[baseUri]/app/images/layout/favicon.png" />
+        <meta name="author" content="[config_site_title]">
+        <link href="js/jquery/bootstrap-3.3.6/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="js/jquery/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+        <link href="css/public/main.css" rel="stylesheet" type="text/css"/> 
+        <link href="css/public/tema.php?bd=[config_color_bd]&bh=[config_color_bh]&cd=[config_color_cd]&ch=[config_color_ch]&bk=[config_color_bk]&bt=[config_color_top]" rel="stylesheet" type="text/css"/>  
+        <script src="js/jquery/jquery-1.11.3.min.js" type="text/javascript"></script>      
+        <script src="js/public/ga.js" type="text/javascript"></script>
+    </head>
+    <body>
+        <?php include 'topo.html'; ?>
+        <div class="container">
+            <div id="main">
+                <ul class="breadcrumb">
+                    <li class="hidden-xs"><a href="[baseUri]/"><i class="fa fa-home"></i> Home</a></li>
+                    <li class="hidden-xs"><a  href="[baseUri]/cliente/"><i class="fa fa-user"></i> Área do Cliente</a></li>
+                    <li class="hidden-xs"><a href="[baseUri]/cliente/endereco/"><i class="fa fa-map-marker itop-3"></i> Meus endereços</a></li>
+                    <li class="active"><a><i class="fa fa-plus-circle"></i> Novo Endereço</a></li>
+                </ul> 
+                <div class="page-content">
+                    [message_default]
+                    <form id="f-atd" class="form validate" method="post" action="[baseUri]/cliente/enderecoAdd/" >
+                        <div class="row">
+                            <div class="col-md-8 col-xs-12">
+                                <div class="form-group">
+                                    <label for="endereco_title">Descrição (ex. Casa, Escritório...)</label>
+                                    <span class="text-danger">*</span>
+                                    <input type="text" name="endereco_title" id="endereco_title" class="form-control" placeholder="identificação do endereço (ex: casa)" required />
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-xs-12">
+                                <div class="form-group">
+                                    <label for="endereco_cep">CEP</label>
+                                    <span class="text-danger">*</span>
+                                    <input type="text" name="endereco_cep" id="endereco_cep" class="form-control cep" placeholder="nome da rua/av/logradouro"  required />
+                                </div>
+                            </div>
+                            <div class="col-md-8 col-xs-12">
+                                <div class="form-group">
+                                    <label for="endereco_rua">Endereço</label>
+                                    <span class="text-danger">*</span>
+                                    <input type="text" name="endereco_rua" id="endereco_rua" class="form-control" placeholder="nome da rua/av/logradouro" required />
+                                </div>
+                            </div>
+                            <div class="col-md-2 col-xs-12">
+                                <div class="form-group">
+                                    <label for="endereco_num">Número</label>
+                                    <span class="text-danger">*</span>
+                                    <input type="text" name="endereco_num" id="endereco_num" class="form-control" placeholder="informe o número" required />
+                                </div>
+                            </div>
+                            <div class="col-md-2 col-xs-12">
+                                <div class="form-group">
+                                    <label for="endereco_complemento">Complemento</label>
+                                    <input type="text" name="endereco_complemento" id="endereco_complemento" class="form-control" placeholder="ex: Bloco 5 - Ap 200" />
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-xs-12">
+                                <div class="form-group">
+                                    <label for="endereco_bairro">Bairro</label>
+                                    <span class="text-danger">*</span>
+                                    <input type="text" name="endereco_bairro" id="endereco_bairro" class="form-control" placeholder="informe o nome do bairro" required />
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-xs-12">
+                                <div class="form-group">
+                                    <label for="endereco_cidade">Cidade</label>
+                                    <span class="text-danger">*</span>
+                                    <input type="text" name="endereco_cidade" id="endereco_cidade" class="form-control" placeholder="informe o nome da cidade" required />
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-xs-12">
+                                <div class="form-group">
+                                    <label for="endereco_uf">UF/Estado</label>
+                                    <span class="text-danger">*</span>
+                                    <input type="text" name="endereco_uf" id="endereco_uf" class="form-control" placeholder="informe a UF / estado ex: SP" required />
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" id="btn-update" class="btn btn-custom"><i class="fa fa-save"></i> Cadastrar Endereço</button>
+                    </form>
+                </div>
+            </div>
+        </div><br/><br/><br/><br/>
+        <?php include 'footer.html'; ?>      
+        <script src="js/public/endereco.js" type="text/javascript"></script>
+        <script type="text/javascript" src="js/jquery/jquery.mask.js"></script>
+        <script src="js/jquery/validate/jquery.validate.v2.js" type="text/javascript"></script>
+        <!--[if IE]>
+        <script src="js/jquery/jquery.placeholder.js" type="text/javascript"></script>
+        <script>$(function() { $('input, textarea').placeholder();});</script>
+        <![endif]-->        
+        <script>[msg_error]</script>        
+    </body>
+</html>

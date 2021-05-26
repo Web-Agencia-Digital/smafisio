@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>[config_site_title] | Painel Administrativo</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script src="js/jquery/jquery-1.8.3.min.js" type="text/javascript"></script>
+        <script src="js/jquery/jquery-ui-1.9.2.js" type="text/javascript"></script>
+        <script src="js/admin/main.js" type="text/javascript"></script>
+        <script src="js/jquery/bootstrap/js/bootstrap.js" type="text/javascript"></script>
+        <link href="js/jquery/bootstrap/css/bootstrap.css" rel="stylesheet" />
+        <link href="js/jquery/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" />
+        <link href="css/admin/main.css" rel="stylesheet" />
+        <script src="js/jquery/jquery.price.js" type="text/javascript"></script>        
+        <script src="js/jquery/jquery.mask.js" type="text/javascript"></script>        
+        <script>
+            $(function () {
+                $('#frete_cep_origem').mask('99999999');
+            })
+        </script>
+    </head>
+    <body>
+        <div id="main">
+            <?php require_once 'menu_login.html'; ?>
+            <div class="row-fluid">
+                <div class="span2 pull-left">
+                    <?php require_once 'menu.html'; ?>
+                </div>    
+                <div class="span10 pull-right" id="sright">
+                    <div class="row-fluid">
+                        <div class="panel panel-box">
+                            <div class="title-grid-inverse">
+                                <i class="icon-cog icon-white"></i>  <b>Parâmetros de Frete</b>
+                            </div>
+                            <form name="f-frete" id="f-frete" class="form mar-top-10" method="post" onSubmit="return valida()"
+                                  action="[baseUri]/admin/frete/atualizar/" style="padding: 10px;">
+                                <p><b>PARÂMETROS PARA OS CORREIOS</b></p>
+                                <div class="input-prepend">
+                                    <span class="add-on">CEP de Origem: </span>
+                                    <input class="span6" name="frete_cep_origem" id="frete_cep_origem" type="text" 
+                                           value="[frete_cep_origem]" placeholder="CEP de Origem / Saída do produto" />
+                                </div>
+
+                                <!--
+                                <div class="input-prepend hide">
+                                    <span class="add-on">Prazo Padrão (dias): </span>
+                                    <input class="span6" name="frete_prazo" id="frete_prazo" type="text" 
+                                           value="[frete_prazo]" placeholder="Prazo padrão adicional" />
+                                </div>
+                                -->
+
+                                <div class="input-prepend hide">
+                                    <span class="add-on">Taxa Adicional: </span>
+                                    <input class="span6" name="frete_taxa" id="frete_taxa" type="text" 
+                                           value="[frete_taxa]" placeholder="Taxa adicional somada ao frete. Ex. custo da embalagem" />
+                                </div>
+                                <div class="input-prepend">
+                                    <span class="add-on">Formas de Envio (Correios): </span>
+
+                                    <label class="checkbox inline font-black" style="margin-left: 10px; margin-right: 15px;">
+                                        <input type="checkbox" id="frete_pac" name="frete_pac" value="1"> PAC
+                                    </label>
+                                    <label class="checkbox inline font-black" style="margin-left: 10px;  margin-right: 15px;">
+                                        <input type="checkbox" id="frete_sedex" name="frete_sedex" value="1"> Sedex
+                                    </label>
+                                    <label class="checkbox inline font-black" style="margin-left: 10px;  margin-right: 15px;">
+                                        <input type="checkbox" id="frete_sedex10" name="frete_sedex10" value="1"> Sedex 10
+                                    </label>                                        
+                                </div>
+                                <div class="input-prepend hide">
+                                    <span class="add-on">Exibir Frete Grátis: </span>
+                                    <select name="frete_show_free" id="frete_show_free" class="span6">
+                                        <option value="2">Não</option>
+                                        <option value="1">Sim</option>
+                                    </select>
+                                </div>                                    
+                                <div class="input-prepend">
+                                    <span class="add-on">Opções Entrega/Retirada: </span>
+                                    <select name="frete_opcoes" id="frete_opcoes" class="span6">
+                                        <option value="2">Exibir Somente Entrega</option>
+                                        <option value="3">Exibir Somente Retirada</option>
+                                        <option value="1">Exibir Entrega e Retirada</option>
+                                    </select>
+                                </div>
+                                <br />
+                                <p><b>PARÂMETROS - FRETE GRÁTIS</b></p>
+                                
+                                <div class="input-prepend">
+                                    <span class="add-on">Frete Grátis Sul/Sudeste: </span>
+                                    <input class="span6 money" name="frete_sul" id="frete_sul" type="text"
+                                           value="[frete_sul]" placeholder="Ex: 200,00" />
+                                </div>                                
+                                <div class="input-prepend">
+                                    <span class="add-on">Frete Grátis Outros Estados: </span>
+                                    <input class="span6 money" name="frete_apt" id="frete_apt" type="text" 
+                                           value="[frete_apt]" placeholder="Ex: 400,00" />
+                                </div>                                
+                                <div class="input-prepend">
+                                    <span class="add-on">Frete Grátis Prazo: </span>
+                                    <input class="span6" name="frete_prazo" id="frete_prazo" type="number"
+                                           value="[frete_prazo]" placeholder="prazo em dias ex: 7" />
+                                </div>
+                                <br />
+
+                                <p><b>PARÂMETROS - TRANSPORTADORA BRASPRESS</b></p>
+
+                                <div class="input-prepend">
+                                    <span class="add-on">NOME DO SERVIÇO: </span>
+                                    <input class="span6" name="frete_braspress_nome" id="frete_braspress_nome" type="text"
+                                           value="[frete_braspress_nome]" placeholder="Ex: Transportadora X ou Entrega Padrão" required/>
+                                </div>
+
+                                <div class="input-prepend">
+                                    <span class="add-on">CNPJ CONVENIADO: </span>
+                                    <input class="span6" name="frete_braspress" id="frete_braspress" type="text"
+                                           value="[frete_braspress]" placeholder="Ex: 12345610000999" />
+                                </div>
+                                <div class="input-prepend">
+                                    <span class="add-on">STATUS DO MÓDULO: </span>
+                                    <select class="span6" name="frete_braspress_ativo" id="frete_braspress_ativo">
+                                        <option value="0">Desabilitado</option>
+                                        <option value="1">Habilitado</option>
+                                        </select>
+                                </div>
+                                <br />
+
+
+                                <p><b>PARÂMETROS - TRANSPORTADORA JADLOG</b></p>
+
+                                <div class="input-prepend">
+                                    <span class="add-on">NOME DO SERVIÇO: </span>
+                                    <input class="span6" name="frete_jadlog_nome" id="frete_jadlog_nome" type="text"
+                                           value="[frete_jadlog_nome]" placeholder="Ex: Transportadora X ou Entrega Padrão" required/>
+                                </div>
+
+                                <div class="input-prepend">
+                                    <span class="add-on">CNPJ CONVENIADO: </span>
+                                    <input class="span6" name="frete_jadlog_cnpj" id="frete_jadlog_cnpj" type="text"
+                                           value="[frete_jadlog_cnpj]" placeholder="Ex: 12345610000999" />
+                                </div>
+
+                                <div class="input-prepend">
+                                    <span class="add-on">SENHA JADLOG: </span>
+                                    <input class="span6" name="frete_jadlog_senha" id="frete_jadlog_senha" type="text"
+                                           value="[frete_jadlog_senha]" placeholder="Ex: 12345610000999" />
+                                </div>
+
+                                <div class="input-prepend">
+                                    <span class="add-on">STATUS DO MÓDULO: </span>
+                                    <select class="span6" name="frete_jadlog_ativo" id="frete_jadlog_ativo">
+                                        <option value="0">Desabilitado</option>
+                                        <option value="1">Habilitado</option>
+                                    </select>
+                                </div>
+                                <br />
+
+
+
+                                <p><b>PARÂMETROS - TRANSPORTADORA JAMEF</b></p>
+
+                                <div class="input-prepend">
+                                    <span class="add-on">NOME DO SERVIÇO: </span>
+                                    <input class="span6" name="frete_jamef_nome" id="frete_jamef_nome" type="text"
+                                           value="[frete_jamef_nome]" placeholder="Ex: Transportadora X ou Entrega Padrão" required/>
+                                </div>
+
+
+                                <div class="input-prepend">
+                                    <span class="add-on">USUÁRIO CONVENIADO: </span>
+                                    <input class="span6" name="frete_jamef_user" id="frete_jamef_user" type="text"
+                                           value="[frete_jamef_user]" placeholder="Informe o login" />
+                                </div>
+
+                                <div class="input-prepend">
+                                    <span class="add-on">CNPJ CONVENIADO: </span>
+                                    <input class="span6" name="frete_jamef_cnpj" id="frete_jamef_cnpj" type="text"
+                                           value="[frete_jamef_cnpj]" placeholder="Ex: 12345610000999" />
+                                </div>
+
+                                <div class="input-prepend">
+                                    <span class="add-on">FILIAL JAMEF: </span>
+                                    <input class="span6" name="frete_jamef_filial" id="frete_jamef_filial" type="text"
+                                           value="[frete_jamef_filial]" placeholder="Ex: 01" />
+                                </div>
+
+                                <div class="input-prepend">
+                                    <span class="add-on">STATUS DO MÓDULO: </span>
+                                    <select class="span6" name="frete_jamef_ativo" id="frete_jamef_ativo">
+                                        <option value="0">Desabilitado</option>
+                                        <option value="1">Habilitado</option>
+                                    </select>
+                                </div>
+                                <br />
+
+
+                                <p><b>PARÂMETROS - TRANSPORTADORA REDECARGO</b></p>
+
+                                <div class="input-prepend">
+                                    <span class="add-on">NOME DO SERVIÇO: </span>
+                                    <input class="span6" name="frete_redecargo_nome" id="frete_redecargo_nome" type="text"
+                                           value="[frete_redecargo_nome]" placeholder="Ex: Transportadora X ou Entrega Padrão" required/>
+                                </div>
+
+                                <div class="input-prepend">
+                                    <span class="add-on">CHAVE: </span>
+                                    <input class="span6" name="frete_redecargo_chave" id="frete_redecargo_chave" type="text"
+                                           value="[frete_redecargo_chave]" placeholder="Informe sua chave / token" />
+                                </div>
+
+                                <div class="input-prepend">
+                                    <span class="add-on">STATUS DO MÓDULO: </span>
+                                    <select class="span6" name="frete_redecargo_ativo" id="frete_redecargo_ativo">
+                                        <option value="0">Desabilitado</option>
+                                        <option value="1">Habilitado</option>
+                                    </select>
+                                </div>
+                                <br />
+
+                                <p><b>PARÂMETROS - TRANSPORTADORA DLOG</b></p>
+
+                                <div class="input-prepend">
+                                    <span class="add-on">NOME DO SERVIÇO: </span>
+                                    <input class="span6" name="frete_dlog_nome" id="frete_dlog_nome" type="text"
+                                           value="[frete_dlog_nome]" placeholder="Ex: Transportadora X ou Entrega Padrão" required/>
+                                </div>
+
+                                <div class="input-prepend">
+                                    <span class="add-on">LOGIN: </span>
+                                    <input class="span6" name="frete_dlog_login" id="frete_dlog_login" type="text"
+                                           value="[frete_dlog_login]" placeholder="Informe o login" />
+                                </div>
+
+                                <div class="input-prepend">
+                                    <span class="add-on">TOKEN: </span>
+                                    <input class="span6" name="frete_dlog_token" id="frete_dlog_token" type="text"
+                                           value="[frete_dlog_token]" placeholder="Informe o token" />
+                                </div>
+
+                                <div class="input-prepend">
+                                    <span class="add-on">STATUS DO MÓDULO: </span>
+                                    <select class="span6" name="frete_dlog_ativo" id="frete_dlog_ativo">
+                                        <option value="0">Desabilitado</option>
+                                        <option value="1">Habilitado</option>
+                                    </select>
+                                </div>
+                                <br />
+
+
+                                <p><b>PARÂMETROS - TRANSPORTADORA TNT</b></p>
+
+                                <div class="input-prepend">
+                                    <span class="add-on">NOME DO SERVIÇO: </span>
+                                    <input class="span6" name="frete_tnt_nome" id="frete_tnt_nome" type="text"
+                                           value="[frete_tnt_nome]" placeholder="Ex: Transportadora X ou Entrega Padrão" required/>
+                                </div>
+
+                                <div class="input-prepend">
+                                    <span class="add-on">LOGIN: </span>
+                                    <input class="span6" name="frete_tnt_login" id="frete_tnt_login" type="text"
+                                           value="[frete_tnt_login]" placeholder="Informe o login" />
+                                </div>
+
+                                <div class="input-prepend">
+                                    <span class="add-on">IE: </span>
+                                    <input class="span6" name="frete_tnt_ie" id="frete_tnt_ie" type="text"
+                                           value="[frete_tnt_ie]" placeholder="Inscrição estadual" />
+                                </div>
+
+                                <div class="input-prepend">
+                                    <span class="add-on">ID REMETENTE: </span>
+                                    <input class="span6" name="frete_tnt_remid" id="frete_tnt_remid" type="text"
+                                           value="[frete_tnt_remid]" placeholder="Ex: 12234" />
+                                </div>
+
+                                <div class="input-prepend">
+                                    <span class="add-on">TIPO DE SERVIÇO: </span>
+                                    <input class="span6" name="frete_tnt_tipo" id="frete_tnt_tipo" type="text"
+                                           value="[frete_tnt_tipo]" placeholder="Ex: RNC" />
+                                </div>
+
+
+                                <div class="input-prepend">
+                                    <span class="add-on">STATUS DO MÓDULO: </span>
+                                    <select class="span6" name="frete_tnt_ativo" id="frete_tnt_ativo">
+                                        <option value="0">Desabilitado</option>
+                                        <option value="1">Habilitado</option>
+                                    </select>
+                                </div>
+                                <br />
+
+
+
+
+                                <!--
+                            <p><b>PARÂMETROS DE FRETE BASEADO NO VALOR DO PRODUTO - ENVIO TRANSPORTADORA</b></p>
+
+                            <div class="input-prepend">
+                                <span class="add-on">Frete Sul/Sudeste %: </span>
+                                <input class="span6" name="frete_perc_sul" id="frete_perc_sul" type="number"
+                                       value="[frete_perc_sul]" placeholder="Percentual valor do produto ex: 15" />
+                            </div>
+                            <div class="input-prepend">
+                                <span class="add-on">Frete Outros Estados %: </span>
+                                <input class="span6 " name="frete_perc_apt" id="frete_perc_apt" type="number"
+                                       value="[frete_perc_apt]" placeholder="Percentual valor do produto ex: 15" />
+                            </div>
+                            <div class="input-prepend">
+                                <span class="add-on">Prazo Sul/Sudeste: </span>
+                                <input class="span6" name="frete_perc_prazo_sul" id="frete_perc_prazo_sul" type="number"
+                                       value="[frete_perc_prazo_sul]" placeholder="prazo em dias ex: 7" />
+                            </div>
+                            <div class="input-prepend">
+                                <span class="add-on">Prazo Outros Estados: </span>
+                                <input class="span6" name="frete_perc_prazo_outros" id="frete_perc_prazo_outros" type="number"
+                                       value="[frete_perc_prazo_outros]" placeholder="prazo em dias ex: 7" />
+                            </div>
+                                -->
+
+                                <br />
+                                <br />
+
+                                <p class="center text-center">
+                                    <button type="submit" class="btn btn-primary" id="btn-add"><i class="icon-edit icon-white"></i> Atualizar Parâmetros de Frete</button>
+                                </p>
+                            </form> 
+                        </div>                            
+                    </div>                                     
+                </div>
+            </div>
+            <?php require_once 'footer.html'; ?>       
+        </div> <!--end main-->
+        <script type="text/javascript">
+            window.onload = function () {
+                [msgOnload]
+            }
+            $("#menu-frete").addClass('active');
+            $("#frete-opcoes").addClass('active');
+            $('#frete_taxa').priceFormat({
+                prefix: ''
+            });
+            var popcontent = '<p>Taxa adicional cobrada do cliente, valor somado ao frete. Ex: custo embalagem<p>';
+            $('#frete_taxa').popover({
+                placement: 'top',
+                title: 'Taxa Adicional',
+                html: true,
+                content: popcontent
+            });
+            $('#frete_opcoes').val('[frete_opcoes]');
+            $('#frete_show_free').val('[frete_show_free]');
+            if ('[frete_pac]' == '1') {
+                $('#frete_pac').attr('checked', 'checked');
+            }
+            if ('[frete_sedex]' == '1') {
+                $('#frete_sedex').attr('checked', 'checked');
+            }
+            if ('[frete_sedex10]' == '1') {
+                $('#frete_sedex10').attr('checked', 'checked');
+            }
+            var popcontent4 = '<p>Este prazo será somado ao prazo dado pelos correios.<p>';
+            $('#frete_prazo').popover({
+                placement: 'top',
+                title: 'Prazo Adicional em dias',
+                html: true,
+                content: popcontent4
+            });
+            var popcontent = '<p>Quando o produto for configurado para não cobrar frete, exibir a mensagem "frete grátis" nos detalhes do produto.<p>';
+            $('#frete_show_free').popover({
+                placement: 'top',
+                title: 'Exibir Frete Grátis',
+                html: true,
+                content: popcontent
+            });
+            $('#frete_braspress').mask('99999999999999');
+            $('#frete_braspress_ativo').val('[frete_braspress_ativo]');
+            $('.money').mask('000.000.000.000.000,00', {
+                reverse: true
+            });
+            $('#frete_jadlog_cnpj').mask('99999999999999');
+            $('#frete_jamef_cnpj').mask('99999999999999');
+            $('#frete_jadlog_ativo').val('[frete_jadlog_ativo]');
+
+            $('#frete_redecargo_ativo').val('[frete_redecargo_ativo]');
+            $('#frete_jamef_ativo').val('[frete_jamef_ativo]');
+            $('#frete_tnt_ativo').val('[frete_tnt_ativo]');
+            $('#frete_dlog_ativo').val('[frete_dlog_ativo]');
+
+        </script>
+    </body>
+</html>

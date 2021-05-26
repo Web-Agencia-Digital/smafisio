@@ -1,0 +1,91 @@
+<form action="[baseUri]/finalizar/checkout/" method="post" id="formulario">
+    <div class="col-md-6 col-xs-12 form-cielo" >
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label>Número do cartão</label>
+                    <input class="form-control cielo-control"
+                           type="text" maxlength="20" name="fakecartao_num" id="fakecartao_num" placeholder="informe o número do cartão de crédito" required />
+                </div>
+            </div>
+            <input type="hidden" name="cartao_num" id="cartao_num">
+        </div>
+        <div class="hide form-group">
+            <label>Bandeira do Cartão</label>
+            <p id="brand_flag"></p>
+        </div>
+        <div class="form-group">
+            <label>Nome do Titular
+                <small class="text-muted">(exatamente como está impresso no cartão)</small>
+            </label>
+            <input class="text-uppercase form-control cielo-control" type="text" name="cartao_nome" id="cartao_nome" placeholder="Preenchimento obrigatório" required />
+        </div>
+        <div class="form-group">
+            <label>CPF/CNPJ do Titular do cartão</label>
+            <input class="form-control cielo-control cpf" type="text" name="cartao_cpf" id="cartao_cpf" placeholder="Preenchimento obrigatório" required/>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>Mês de validade</label>
+                    <select class="form-control cielo-control" name="cartao_mes" id="cartao_mes" required>
+                        <option value="">Mês</option>
+                        <option value="01">01</option>
+                        <option value="02">02</option>
+                        <option value="03">03</option>
+                        <option value="04">04</option>
+                        <option value="05">05</option>
+                        <option value="06">06</option>
+                        <option value="07">07</option>
+                        <option value="08">08</option>
+                        <option value="09">09</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>Ano de validade</label>
+                    <select class="form-control cielo-control" name="cartao_ano" id="cartao_ano" required>
+                        <option value="">Ano</option>
+                        <?php for ($i = @date('Y'); $i <= @date('Y') + 15; $i++): ?>
+                        <option value="<?= $i ?>"><?= $i ?></option>
+                        <?php endfor; ?>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>Código de segurança</label>
+                    <input class="form-control cielo-control only-number"
+                           type="text" pattern="\d*" maxlength="4"
+                           name="cartao_cod" id="cartao_cod" required placeholder="código do cartão"/>
+                </div>
+            </div>
+        </div>
+        <div class="form-group" id="parcelamento">
+            <label>Número de parcelas</label>
+            <select name="card_parcela" id="card_parcela" class="form-control"></select>
+        </div>
+        <div class="hide hide-credito">
+            <input type="hidden" class="form-control" name="session_token" id="session_token" value="[pagseguro_ssid]">
+            <input type="hidden" class="form-control" name="card_token"    id="card_token">
+            <input type="hidden" class="form-control" name="sender_hash"   id="sender_hash">
+            <input type="hidden" name="amount"  id="amount" value="[pagseguro_amount]">
+            <input type="hidden" name="total_amount"  id="total_amount">
+            <input type="hidden" name="pedido_total_parcelado" id="pedido_total_parcelado">
+            <input type="hidden" name="metodo_pagamento" id="metodo-credito" value="credito">
+        </div>
+    </div>
+    <div class="cartao-modelo col-md-6 hidden-xs-down hidden-xs">
+        <div class="card-wrapper"></div>
+    </div>
+    <div class="center btn-pagamento">
+        <button class="disabled concluir-pedido btn btn-success btn-lg mar-top-30" data-loading-text="Aguarde..." id="btn-finaliza-credito">
+            <i class="fa fa-check-circle"></i>
+            Concluir Meu <span class="orcamento-singular">Pedido</span>
+        </button>
+    </div>
+</form>

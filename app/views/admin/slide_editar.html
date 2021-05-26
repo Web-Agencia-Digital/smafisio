@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>[config_site_title] | Painel Administrativo</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script src="js/jquery/jquery-1.8.3.min.js" type="text/javascript"></script>
+        <script src="js/jquery/jquery-ui-1.9.2.js" type="text/javascript"></script>
+        <script src="js/jquery/bootstrap/js/bootstrap.js" type="text/javascript"></script>
+        <script src="js/admin/main.js" type="text/javascript"></script>
+        <script src="js/admin/slide.js" type="text/javascript"></script>
+        <link href="js/jquery/bootstrap/css/bootstrap.css" rel="stylesheet" />        
+        <link href="css/admin/main.css" rel="stylesheet" />
+        <link href="css/default/fakeinput.css" rel="stylesheet" /> 
+    </head>
+    <body>
+        <div id="main">
+            <?php require_once 'menu_login.html'; ?>
+            <div class="row-fluid">
+                <div class="span2 pull-left">
+                    <?php require_once 'menu.html'; ?>
+                </div>                 
+                <div class="span10 pull-right" id="sright">
+                    <div class="row-fluid">
+                        <div class="panel panel-box">
+                            <div class="title-grid-inverse">
+                                <i class="icon-pencil icon-white"></i>  <b>Editar Slide</b>
+                            </div>                            
+                            <div class="box-cart" style="padding:10px;">  
+                                <form name="f-pagina" id="f-pagina" class="form mar-top-10" method="post" 
+                                      enctype="multipart/form-data"
+                                      action="[baseUri]/admin/slideshow/atualizar/[slide_id]/">
+                                    <p class="well well-small" style="color: #333;margin-bottom: 0px;"><i class="icon-picture"></i> 
+                                        <strong>Imagem do Atual:</strong>
+                                    </p>
+                                    <img src="[baseUri]/app/thumber.php?src=fotos/slide/[slide_thumb]&w=600&h=100" class="mar-top-5"/>
+                                    <div class="fakeipt mar-top-10">
+                                        <p class="well well-small" style="color: #333;margin-bottom: 0px;"><i class="icon-picture"></i> 
+                                            <strong>Imagem do Slide:</strong>
+                                        </p>
+                                        <div class="uploader black">
+                                            <input type="text" class="filename" readonly="readonly"/>
+                                            <input type="button" name="file" id="file" class="button" value="Selecionar"/>
+                                            <input type="file" name="filedata" size="30"/>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <p class="well well-small mar-top-5" style="color: #333;margin-bottom: 3px;"><i class="icon-text-width"></i> 
+                                            <strong>Local do Slide:</strong>
+                                        </p>
+                                        <select class="span6 w-all" name="slide_local" id="slide_local">
+                                            <option value="1">Selecione o local do banner...</option>
+                                            <option value="1">Slideshow Topo (Full)</option>
+                                            <option value="5">Banner Top Frete (Full)</option>
+                                            <option value="4">Banner Topo Promo (3 em 3 fotos )</option>
+                                            <option value="2">Banner Meio (Full)</option>
+                                        </select>
+                                    </div>
+
+                                    <!-- <div class="for-slide-top">
+                                        <p class="well well-small mar-top-5" style="color: #333;margin-bottom: 3px;"><i class="icon-text-width"></i> 
+                                            <strong>Título do Slide:</strong>
+                                        </p>
+                                        <input class="span6 ucfirst w-all" name="slide_title" id="slide_title" value="[slide_title]"
+                                               type="text" placeholder="informe uma breve título do slide"/>
+                                    </div>
+
+                                    <div class="for-slide-top">
+                                        <p class="well well-small mar-top-10" style="color: #333;margin-bottom: 5px;"><i class="icon-pencil"></i> 
+                                            <strong>Subtítulo do Slide:</strong>
+                                        </p>
+                                        <input class="span6 ucfirst w-all" name="slide_desc"  value="[slide_desc]"
+                                               id="slide_desc" maxlength="50" type="text" placeholder="informe uma breve descrição do slide"/>
+                                    </div>-->
+                                    <div>
+                                        <p class="well well-small mar-top-10" style="color: #333;margin-bottom: 5px;"><i class="icon-share-alt"></i> 
+                                            <strong>Link do Slide:</strong>
+                                        </p>
+                                        <input class="span6 ucfirst w-all" name="slide_link"  value="[slide_link]"
+                                               id="slide_link" type="text" placeholder="link interno para o slide"/>
+                                    </div>
+                                    <div>
+                                        <p class="well well-small mar-top-5" style="color: #333;margin-bottom: 3px;"><i class="icon-text-width"></i> 
+                                            <strong>Abrir link em nova janela:</strong>
+                                        </p>
+                                        <select class="span6 w-all" name="slide_target" id="slide_target">
+                                            <option value="0" selected >Não</option>
+                                            <option value="1">Sim</option>
+                                        </select>
+                                    </div>
+                                    <button type="submit" class="btn mar-top-10"><i class="icon-refresh"></i> Atualizar</button>
+                                </form> 
+                            </div>
+                        </div>
+                    </div>                    
+                </div>
+
+            <?php require_once 'footer.html'; ?>         
+            </div><!--end row-fluid-->             
+        </div> <!--end main-->
+        <script type="text/javascript">
+            $("#menu-dash").addClass('active');
+            $("#dash-slide").addClass('active');
+            window.onload = function () {
+                [msgOnload]
+            }
+        </script>       
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('#slide_target').val('[slide_target]');
+                $('#slide_local').val('[slide_local]');
+                if ($('#slide_local').val() == 2) {
+                    $('.for-slide-top').hide();
+                } else {
+                    $('.for-slide-top').show();
+                }
+                $("input[type=file]").change(function () {
+                    $(this).parents(".uploader").find(".filename").val($(this).val());
+                });
+                $("input[type=file]").each(function () {
+                    if ($(this).val() == "") {
+                        $(this).parents(".uploader").find(".filename").val("Nenhum arquivo selecionado...");
+                    }
+                });
+            });
+        </script>        
+    </body>
+</html>

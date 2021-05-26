@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>[config_site_title] | Painel Administrativo</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script src="js/jquery/jquery-1.8.3.min.js" type="text/javascript"></script>
+        <script src="js/jquery/jquery-ui-1.9.2.js" type="text/javascript"></script>
+        <script src="js/admin/main.js" type="text/javascript"></script>
+        <script src="js/jquery/bootstrap/js/bootstrap.js" type="text/javascript"></script>
+        <link href="js/jquery/bootstrap/css/bootstrap.css" rel="stylesheet" />
+        <link href="js/jquery/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" />
+        <link href="css/admin/main.css" rel="stylesheet" />
+        <script src="js/jquery/jquery.price.js" type="text/javascript"></script>        
+        <script src="js/jquery/jquery.mask.js" type="text/javascript"></script>        
+    </head>
+    <body>
+        <div id="main">
+            <?php require_once 'menu_login.html'; ?>
+            <div class="row-fluid">
+                <div class="span2 pull-left">
+                    <?php require_once 'menu.html'; ?>
+                </div>             
+                <div class="span10 pull-right" id="sright">
+                    <div class="row-fluid">
+                        <div class="panel panel-box">
+                            <div class="title-grid-inverse">
+                                <i class="icon-cog icon-white"></i>  <b>Boleto Bancário - Parámetros de Pagamento</b>
+                            </div>
+                            <!--<form name="f-frete" id="f-frete" class="form mar-top-10" method="post" onSubmit="return valida()"-->
+                                  <!--action="[baseUri]/admin/pagamento/atualizar/boleto/" style="padding: 10px">-->
+
+                                <!--<input class="hide" name="pay_id" id="pay_id" type="hidden" value="[pay_id]" />-->
+
+                                <!--&lt;!&ndash;<p class="alert alert-info">&ndash;&gt;-->
+                                    <!--&lt;!&ndash;Este módulo permite-lhe receber pagamentos por boleto bancário utilizando o PagSeguro. <br />&ndash;&gt;-->
+                                    <!--&lt;!&ndash;Se o cliente escolher pagar por boleto bancário, o estado da encomenda mudará para "Aguardando Pagamento" <br />&ndash;&gt;-->
+                                    <!--&lt;!&ndash;Posto isto, terá de confirmar manualmente a encomenda após receber ou dar baixa no boleto.  <br />&ndash;&gt;-->
+                                <!--&lt;!&ndash;</p>&ndash;&gt;-->
+                                <!--&lt;!&ndash;<p class="hide well well-small" style="color: #333;"><i class="icon-retweet"></i>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<strong>Informe o do Banco</strong>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<br>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<span class="input-prepend">&ndash;&gt;-->
+                                        <!--&lt;!&ndash;<select name="pay_user"  id="pay_user" class="span6">&ndash;&gt;-->
+                                            <!--&lt;!&ndash;<option value="Bradesco">Bradesco</option>&ndash;&gt;-->
+                                            <!--&lt;!&ndash;&lt;!&ndash; &ndash;&gt;-->
+                                            <!--&lt;!&ndash;<option value="Itaú">Itaú</option>&ndash;&gt;-->
+                                            <!--&lt;!&ndash;<option value="Caixa">Caixa</option>&ndash;&gt;-->
+                                            <!--&lt;!&ndash;&ndash;&gt;&ndash;&gt;-->
+                                        <!--&lt;!&ndash;</select>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;</span>&ndash;&gt;-->
+                                <!--&lt;!&ndash;</p>&ndash;&gt;-->
+
+                                <!--&lt;!&ndash;-->
+                                <!--<p class="hide well well-small" style="color: #333;"><i class="icon-retweet"></i>-->
+                                    <!--<strong>Informe o número do Convênio</strong>-->
+                                    <!--<br>-->
+                                    <!--<span class="input-prepend">-->
+                                        <!--<input class="span6" required name="pay_c5" id="pay_c5" type="text" value="[pay_c5]" placeholder="Informe o número do Convênio" />-->
+                                    <!--</span>-->
+                                <!--</p>-->
+                                    <!--&ndash;&gt;-->
+                                <!--&lt;!&ndash;<p class="hide well well-small" style="color: #333;"><i class="icon-retweet"></i>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<strong>Informe a Agência e Dígito</strong>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<br>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<span class="input-prepend">&ndash;&gt;-->
+                                        <!--&lt;!&ndash;<input class="span4" required name="pay_c1" id="pay_c1" type="text" value="[pay_c1]" placeholder="Informe o agência sem o dígito" />&ndash;&gt;-->
+                                    <!--&lt;!&ndash;</span>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;&nbsp; &nbsp; &nbsp; &nbsp;&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<span class="input-append">&ndash;&gt;-->
+                                        <!--&lt;!&ndash;<input class="span2" required name="pay_c2" id="pay_c2" type="text" value="[pay_c2]" placeholder="Informe o dígito da agência" />&ndash;&gt;-->
+                                    <!--&lt;!&ndash;</span>&ndash;&gt;-->
+                                <!--&lt;!&ndash;</p>&ndash;&gt;-->
+
+                                <!--&lt;!&ndash;<p class="hide well well-small" style="color: #333;"><i class="icon-retweet"></i>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<strong>Informe a Conta e Dígito</strong>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<br>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<span class="input-prepend">&ndash;&gt;-->
+                                        <!--&lt;!&ndash;<input class="span4" required name="pay_c3" id="pay_c3" type="text" value="[pay_c3]" placeholder="Informe a conta sem o dígito" />&ndash;&gt;-->
+                                    <!--&lt;!&ndash;</span>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;&nbsp; &nbsp; &nbsp; &nbsp;&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<span class="input-append">&ndash;&gt;-->
+                                        <!--&lt;!&ndash;<input class="span2" required name="pay_c4" id="pay_c4" type="text" value="[pay_c4]" placeholder="Informe o dígito da conta" />&ndash;&gt;-->
+                                    <!--&lt;!&ndash;</span>&ndash;&gt;-->
+                                <!--&lt;!&ndash;</p>&ndash;&gt;-->
+
+                                <!--&lt;!&ndash;<p class="hide well well-small" style="color: #333;"><i class="icon-minus-sign"></i>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<strong>Carteira</strong>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<br>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<span class="input-prepend">&ndash;&gt;-->
+                                        <!--&lt;!&ndash;<input class="span6" required name="pay_c5" id="pay_c5" type="number" value="[pay_c5]" placeholder="Número da Carteira ex: 3, 6 ou 9" />&ndash;&gt;-->
+                                    <!--&lt;!&ndash;</span>&ndash;&gt;-->
+                                <!--&lt;!&ndash;</p>&ndash;&gt;-->
+
+                                <!--&lt;!&ndash;<p class="hide well well-small" style="color: #333;"><i class="icon-retweet"></i>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<strong>Prazo de Vencimento</strong>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<br>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<span class="input-prepend">&ndash;&gt;-->
+                                        <!--&lt;!&ndash;<input class="span6" required name="pay_d2" id="pay_d2" type="number" value="[pay_d2]" placeholder="Prazo em dias para vencimento do boleto ex: 5" />&ndash;&gt;-->
+                                    <!--&lt;!&ndash;</span>&ndash;&gt;-->
+                                <!--&lt;!&ndash;</p>&ndash;&gt;-->
+
+
+                                <!--&lt;!&ndash;<p class="hide well well-small" style="color: #333;"><i class="icon-retweet"></i>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<strong>Razão Social / Nome</strong>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<br>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<span class="input-prepend">&ndash;&gt;-->
+                                        <!--&lt;!&ndash;<input class="span6" required name="pay_key" id="pay_key" type="text" value="[pay_key]" placeholder="Informe o nome jurídica / física " />&ndash;&gt;-->
+                                    <!--&lt;!&ndash;</span>&ndash;&gt;-->
+                                <!--&lt;!&ndash;</p>&ndash;&gt;-->
+
+                                <!--&lt;!&ndash;<p class="hide well well-small" style="color: #333;"><i class="icon-retweet"></i>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<strong>CNPJ / CPF</strong>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<br>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<span class="input-prepend">&ndash;&gt;-->
+                                        <!--&lt;!&ndash;<input class="span6" required name="pay_c6" id="pay_c6" type="text" value="[pay_c6]" placeholder="Informe um documento CPF / CNPJ" />&ndash;&gt;-->
+                                    <!--&lt;!&ndash;</span>&ndash;&gt;-->
+                                <!--&lt;!&ndash;</p>&ndash;&gt;-->
+
+                                <!--&lt;!&ndash;<p class="hide well well-small" style="color: #333;"><i class="icon-retweet"></i>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<strong>Endereço</strong>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<br>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<span class="input-prepend">&ndash;&gt;-->
+                                        <!--&lt;!&ndash;<input class="span6" required name="pay_c7" id="pay_c7" type="text" value="[pay_c7]" placeholder="Informe o endereço ex: Av. Paulista, 500 - Centro" />&ndash;&gt;-->
+                                    <!--&lt;!&ndash;</span>&ndash;&gt;-->
+                                <!--&lt;!&ndash;</p>&ndash;&gt;-->
+
+                                <!--&lt;!&ndash;<p class="hide well well-small" style="color: #333;"><i class="icon-retweet"></i>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<strong>CEP</strong>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<br>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<span class="input-prepend">&ndash;&gt;-->
+                                        <!--&lt;!&ndash;<input class="span6 cep" required name="pay_c8" id="pay_c8" type="text" value="[pay_c8]" placeholder="Informe o CEP ex: 11700-000" />&ndash;&gt;-->
+                                    <!--&lt;!&ndash;</span>&ndash;&gt;-->
+                                <!--&lt;!&ndash;</p>&ndash;&gt;-->
+
+                                <!--&lt;!&ndash;<p class="hide well well-small" style="color: #333;"><i class="icon-retweet"></i>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<strong>Estado</strong>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<br>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<span class="input-prepend">&ndash;&gt;-->
+                                        <!--&lt;!&ndash;<select class="span6" required name="pay_d1" id="pay_d1">&ndash;&gt;-->
+                                            <!--&lt;!&ndash;<option value="AC">AC</option>&ndash;&gt;-->
+                                            <!--&lt;!&ndash;<option value="AL">AL</option>&ndash;&gt;-->
+                                            <!--&lt;!&ndash;<option value="AM">AM</option>&ndash;&gt;-->
+                                            <!--&lt;!&ndash;<option value="AP">AP</option>&ndash;&gt;-->
+                                            <!--&lt;!&ndash;<option value="BA">BA</option>&ndash;&gt;-->
+                                            <!--&lt;!&ndash;<option value="CE">CE</option>&ndash;&gt;-->
+                                            <!--&lt;!&ndash;<option value="DF">DF</option>&ndash;&gt;-->
+                                            <!--&lt;!&ndash;<option value="ES">ES</option>&ndash;&gt;-->
+                                            <!--&lt;!&ndash;<option value="GO">GO</option>&ndash;&gt;-->
+                                            <!--&lt;!&ndash;<option value="MA">MA</option>&ndash;&gt;-->
+                                            <!--&lt;!&ndash;<option value="MG">MG</option>&ndash;&gt;-->
+                                            <!--&lt;!&ndash;<option value="MS">MS</option>&ndash;&gt;-->
+                                            <!--&lt;!&ndash;<option value="MT">MT</option>&ndash;&gt;-->
+                                            <!--&lt;!&ndash;<option value="PA">PA</option>&ndash;&gt;-->
+                                            <!--&lt;!&ndash;<option value="PB">PB</option>&ndash;&gt;-->
+                                            <!--&lt;!&ndash;<option value="PE">PE</option>&ndash;&gt;-->
+                                            <!--&lt;!&ndash;<option value="PI">PI</option>&ndash;&gt;-->
+                                            <!--&lt;!&ndash;<option value="PR">PR</option>&ndash;&gt;-->
+                                            <!--&lt;!&ndash;<option value="RJ">RJ</option>&ndash;&gt;-->
+                                            <!--&lt;!&ndash;<option value="RN">RN</option>&ndash;&gt;-->
+                                            <!--&lt;!&ndash;<option value="RO">RO</option>&ndash;&gt;-->
+                                            <!--&lt;!&ndash;<option value="RR">RR</option>&ndash;&gt;-->
+                                            <!--&lt;!&ndash;<option value="RS">RS</option>&ndash;&gt;-->
+                                            <!--&lt;!&ndash;<option value="SC">SC</option>&ndash;&gt;-->
+                                            <!--&lt;!&ndash;<option value="SE">SE</option>&ndash;&gt;-->
+                                            <!--&lt;!&ndash;<option value="SP">SP</option>&ndash;&gt;-->
+                                            <!--&lt;!&ndash;<option value="TO">TO</option>&ndash;&gt;-->
+                                        <!--&lt;!&ndash;</select>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;</span>&ndash;&gt;-->
+                                <!--&lt;!&ndash;</p>&ndash;&gt;-->
+
+                                <!--&lt;!&ndash;<p class="hide well well-small" style="color: #333;"><i class="icon-retweet"></i>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<strong>Cidade</strong>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<br>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<span class="input-prepend">&ndash;&gt;-->
+                                        <!--&lt;!&ndash;<input class="span6" required name="pay_c9" id="pay_c9" type="text" value="[pay_c9]" placeholder="Informe a cidade ex: São Paulo" />&ndash;&gt;-->
+                                    <!--&lt;!&ndash;</span>&ndash;&gt;-->
+                                <!--&lt;!&ndash;</p>&ndash;&gt;-->
+
+                                <!--<p class="well well-small" style="color: #333;"><i class="icon-retweet"></i>-->
+                                    <!--<strong>Status do Módulo</strong>-->
+                                    <!--<br />-->
+                                    <!--<span class="input-prepend">-->
+                                        <!--<select name="pay_status" id="pay_status"  class="span6">-->
+                                            <!--<option value="1">Habilitado</option>-->
+                                            <!--<option value="2">Desabilitado</option>-->
+                                        <!--</select>-->
+                                    <!--</span>                                   -->
+                                <!--</p>-->
+                                <!--<br />-->
+                                <!--<p class="center">-->
+                                    <!--<button type="submit" class="btn btn-primary" id="btn-add">-->
+                                        <!--<i class="icon-edit icon-white"></i> Atualizar Dados Bancários-->
+                                    <!--</button>-->
+                                <!--</p>-->
+                                <!--<br />-->
+                            <!--</form>-->
+                        </div>
+                    </div>                                     
+                </div>
+            </div>
+            <?php require_once 'footer.html'; ?>          
+        </div> <!--end main-->
+        <script type="text/javascript">
+            $("#menu-pagamento").addClass('active');
+            $("#pagamento-boleto").addClass('active');
+            $('#pay_status').val('[pay_status]');
+            $('#pay_d1').val('[pay_d1]');
+            window.onload = function () {
+                [msgOnload]
+            }
+        </script>
+    </body>
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>[config_site_title] | Meu Carrinho</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />       
+        <!--<meta name="title" content="[config_site_title] | Meu Carrinho" />-->    
+        <link rel="canonical" href="[baseUri]/carrinho/" />
+        <meta name="application-name" content="Plataforma Flux Shop">
+        <link rel="icon" type="image/png" sizes="16x16" href="[baseUri]/app/images/layout/favicon.png" />
+        <meta name="author" content="[config_site_title]">
+        <meta name="robots" content="all" /> 
+        <meta name="robots" content="follow" />	        
+        <link href="js/jquery/flexslider/flexslider.css" rel="stylesheet" type="text/css" />                 
+        <link href="js/jquery/bootstrap-3.3.6/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="js/jquery/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+        <link href="css/public/main.css" rel="stylesheet" type="text/css" />  
+        <script src="js/jquery/jquery-1.11.3.min.js" type="text/javascript"></script>
+        <script src="js/jquery/jquery-ui-1.9.2.js" type="text/javascript"></script>
+        <link href="css/public/tema.php?bd=[config_color_bd]&bh=[config_color_bh]&cd=[config_color_cd]&ch=[config_color_ch]&bk=[config_color_bk]&bt=[config_color_top]" rel="stylesheet" type="text/css"/>  
+        <!--[if lt IE 9]>
+        <script src="js/jquery/html5shiv.js"></script>
+        <script src="js/jquery/respond.min.js"></script>
+        <![ endif ]-->     
+        <script src="js/public/ga.js" type="text/javascript"></script>
+    </head>
+    <body>
+        <?php include 'topo.html'; ?>
+        <div class="container">
+            <div  id="main">
+                <ul class="breadcrumb">
+                    <li class="hidden-xs"><a href="[baseUri]/">Home</a></li>
+                    <li class="active"><a class="orcamento-singular">Pedido</a></li>
+                </ul>	
+                <div id="carrinho-cheio" class="[showCheckout]">
+                    <div class="text-right mar-bot-10 hidden-xs">
+                        <a class="btn btn-custom " href="[baseUri]/finalizar/">
+                            <i class="fa fa-check"></i> 
+                            Finalizar <span class="orcamento-singular">Pedido</span>
+                        </a>
+                    </div>
+                    <div class="panel panel-info">
+                        <div class="panel panel-custom">
+                            <div class="panel-heading">
+                                <h5 class="text-white"><i class="fa fa-shopping-basket fa-1x"></i> Itens do seu <span class="orcamento-singular">pedido</span></h5>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <!--{loop:cart}-->
+                            <!--{<div class="col-md-12 col-xs-12 box-cart" id="cart.cart_id">}-->
+                            <!--{<div class="col-md-2 col-xs-5"><img id="div_foto_cart.cart_id" src="thumber.php?zcc=2&w=120&h=90&src=fotos/cart.item_foto" class="img-responsive" /></div>}-->
+                            <!--{<div class="col-md-4 col-xs-7">}-->
+                            <!--{<h4 class="product-name">cart.item_title</h4><h4><small>cart.atributo_ped</small></h4>}-->
+                            <!--{</div>}-->
+                            <!--{<div class="col-md-6 col-xs-12 text-right">}-->
+                            <!--{<div class="col-md-6 col-xs-4">}-->
+                            <!--{<h6>}-->
+                            <!--{<strike class="text-danger cart.showhide_valorOri">R$ cart.item_valor_original</strike>}-->
+                            <!--{cart.item_preco <span class="text-muted">x</span>}-->
+                            <!--{</h6>}-->
+                            <!--{</div>}-->
+                            <!--{<div class="col-md-4 col-xs-12s">}-->
+                            <!--{<div class="col-md-8 col-xs-4">}-->
+                            <!--{<input type="hidden" class="qtde form-control" name="cart_id" id="qtde_cart.cart_id" value="cart.item_qtde" data-estoque="cart.item_estoque" />}-->
+                            <!--{<span class="input_qtde">cart.item_qtde</span>}-->
+                            <!--{</div>}-->
+                            <!--{<div class="col-md-4 col-xs-4 no-margin-left">}-->
+                            <!--{<button type="button" class="tips-right cart-add btn-xs btn-primary" name="cart.cart_id" title="+1"><i class="fa fa-arrow-up"></i></button><br>}-->
+                            <!--{<button type="button" class="tips-right cart-remove btn-xs btn-primary" name="cart.cart_id" title="-1"><i class="fa fa-arrow-down"></i></button>}-->
+                            <!--{</div>}-->
+                            <!--{</div>}-->
+                            <!--{<div class="col-md-1 hidden-xs">}-->
+                            <!--{<button type="button" class="tips-right btn btn-cart-remove mar-top-5" title="remover" id="cart.cart_id"><span class="fa fa-trash"> </span></button>}-->
+                            <!--{</div>}-->
+                            <!--{</div>}-->
+                            <!--{</div>}-->
+                            <!--{end:cart}-->
+                            <div class="row">
+                                <div class="col-md-6 col-xs-12 vitrine">
+                                    <label>Calcule o frete para sua região: </label>
+                                    <form class="form-inline" onsubmit="return false">
+                                        <div class="form-group">
+                                            <input name="frete_cep" id="frete_cep" type="text" placeholder="Informe seu cep" value="[mycep]" class="form-control" />
+                                        </div>
+                                        <button class="btn btn-custom"  type="button"
+                                                id="btn-frete-calculo" 
+                                                data-loading-text="calculando..."
+                                                data-complete-text="calcular">
+                                            <i class="fa fa-check"></i> Calcular
+                                        </button>   
+                                    </form>
+                                </div>
+                                <div class="col-md-6  col-xs-12">
+                                    <span id="frete_result_pac" class="frete_result_pac"> </span>   
+                                </div>
+                                <br>
+                            </div>
+                            <a href="http://www.buscacep.correios.com.br/sistemas/buscacep/" target="_blank" class="hide"><small class="text-muted">não sabe seu cep? clique aqui</small></a>
+                        </div>                        
+                        <div class="panel-footer">
+                            <div class="row">
+                                <div class="" style="padding-right: 10px">
+                                    <h4 class="text-right">Total  <strong> <span class="sp_total" id="total_compra">[cartTotal]</span></strong></h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="[showCheckout] row text-right">
+                        <div class="pull-right">
+                            <div class="col-xs-12">
+                                <a href="[baseUri]/" class="btn-link btn font-15 font-bold"> Escolher mais produtos  <b class="font-14 font-gray"> &nbsp; ou &nbsp; </b>  </a>
+                                <a class="btn btn-custom " href="[baseUri]/finalizar/">
+                                    <i class="fa fa-check"></i> 
+                                    Finalizar <span class="orcamento-singular">Pedido</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="carrinho-vazio" class="[showEmptyCart] text-center img-thumbnail" style="height:auto;width: 100%;">
+                    <a href="[baseUri]">
+                        <img src="[baseUri]/app/images/layout/cart_vazio.png" alt="carrinho vazio" class="img-responsive" />
+                    </a>
+                </div>
+            </div>                                       
+        </div> 
+        <br /><br /><br />
+        <?php include 'footer.html'; ?>
+        <script src="js/jquery/jquery.mask.js" type="text/javascript"></script>        
+        <script src="js/public/carrinho.js?v=100" type="text/javascript"></script>
+    </body>
+</html>

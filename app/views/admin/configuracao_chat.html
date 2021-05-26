@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>[config_site_title] | Painel Administrativo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <script src="js/jquery/jquery-1.8.3.min.js" type="text/javascript"></script>
+    <script src="js/jquery/jquery-ui-1.9.2.js" type="text/javascript"></script>
+    <script src="js/admin/main.js" type="text/javascript"></script>
+    <script src="js/jquery/bootstrap/js/bootstrap.js" type="text/javascript"></script>
+    <link href="js/jquery/bootstrap/css/bootstrap.css" rel="stylesheet"/>
+    <link href="js/jquery/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet"/>
+    <link href="css/admin/main.css" rel="stylesheet"/>
+    <script src="js/jquery/jquery.price.js" type="text/javascript"></script>
+    <script src="js/jquery/jquery.mask.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="main">
+    <?php require_once 'menu_login.html'; ?>
+    <div class="row-fluid">
+        <div class="span2 pull-left">
+            <?php require_once 'menu.html'; ?>
+        </div>
+        <div class="span10 pull-right" id="sright">
+            <div class="row-fluid">
+                <div class="panel panel-box">
+                    <div class="title-grid-inverse">
+                        <i class="icon-cog icon-white"></i> <b>Chat Snippet</b>
+                    </div>
+                    <form name="f-frete" id="f-frete" class="form mar-top-10" method="post"
+                          action="[baseUri]/admin/configuracao/atualizar/chat" style="padding: 10px;">
+                        <input type="hidden" name="config_id" value="1"/>
+                        <div class="">
+                            <label>Código do Chat: (recomendado o uso <a href="http://jivochat.com" target="_blank">jivochat.com</a>
+                                ou <a href="http://zopim.com" target="_blank">zopim.com</a>) </label>
+                                    <textarea class="span10" rows="10" cols="60" name="config_chat"
+                                              placeholder="//    COLE AQUI O CÓDIGO JAVASCRIPT GERADO NO JIVOCHAT, ZOPIM OU OUTROS...
+
+//
+<!-- BEGIN JIVOSITE CODE {literal} -->
+
+<script type='text/javascript'> (function(){ var widget_id = 'OrJu9sXuYj';var d=document;var w=window;function l(){ var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = '//code.jivosite.com/script/widget/'+widget_id; var ss = document.getElementsByTagName('script')[0]; ss.parentNode.insertBefore(s, ss);}if(d.readyState=='complete'){l();}else{if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})();</script>
+
+<!-- {/literal} END JIVOSITE CODE -->
+"
+                                id="config_chat">[config_chat]</textarea>
+                        </div>
+                        <br/>
+                        <button type="submit" class="btn" id="btn-add"><i class="icon-edit"></i> Atualizar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <?php require_once 'footer.html'; ?>
+</div> <!--end main-->
+<script type="text/javascript">
+    $("#menu-config").addClass('active');
+    $("#config-chat").addClass('active');
+    window.onload = function () {
+        [msgOnload]
+        $('#config_site_menu').val('[config_site_menu]');
+    }
+</script>
+</body>
+</html>

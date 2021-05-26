@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>[config_site_title] | Painel Administrativo</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script src="js/jquery/jquery-1.8.3.min.js" type="text/javascript"></script>
+        <script src="js/jquery/jquery-ui-1.9.2.js" type="text/javascript"></script>
+        <script src="js/admin/main.js" type="text/javascript"></script>
+        <script src="js/admin/user.js" type="text/javascript"></script>
+        <script src="js/jquery/bootstrap/js/bootstrap.js" type="text/javascript"></script>
+        <link href="js/jquery/bootstrap/css/bootstrap.css" rel="stylesheet" />
+        <link href="js/jquery/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" />
+        <link href="css/admin/main.css" rel="stylesheet" />       
+    </head>
+    <body>
+        <div id="main">
+            <?php require_once 'menu_login.html'; ?>
+            <div class="row-fluid">
+                <div class="span2 pull-left">
+                    <?php require_once 'menu.html'; ?>
+                </div>                
+                <div class="span10 pull-right" id="sright">
+                    <div class="row-fluid">
+                        <div class="panel">
+                            <div class="title-grid-inverse">
+                                <i class="icon-edit icon-white"></i>  <b>Incluir Usuário do Sistema</b>
+                            </div>
+                            <form name="f-frete" id="f-frete" class="form mar-top-10" method="post" onSubmit="return validaEdit()"
+                                  action="[baseUri]/admin/usuario/atualizar/[user_id]/">
+
+                                <div class="input-prepend">
+                                    <span class="add-on">Nome Completo: </span>
+                                    <input class="span6" name="user_name" id="user_name" autocomplete="off" 
+                                           value="[user_name]" type="text" placeholder="Ex: João da Silva" />
+                                </div>
+                                <div class="input-prepend">
+                                    <span class="add-on">E-mail: </span>
+                                    <input class="span6" name="user_email" id="user_email" autocomplete="off" type="text" 
+                                           value="[user_email]" placeholder="Conta válida de e-mail" />
+                                </div>
+                                <div class="input-prepend">
+                                    <span class="add-on">Nível de Acesso: </span>
+                                    <select name="user_level" id="user_level" class="span6">
+                                        <option value="1">Operador</option>
+                                        <option value="2">Administrador</option>
+                                    </select>
+                                </div>
+                                <div class="input-prepend ">
+                                    <span class="add-on">Login: </span>
+                                    <input class="span6" name="user_login" id="user_login"
+                                           autocomplete="off" type="text" 
+                                           value="[user_login]" disabled />
+                                </div>
+                                <div class="input-prepend">
+                                    <span class="add-on">Senha: </span>
+                                    <input class="span6" name="user_password" id="user_password" autocomplete="off" type="password" 
+                                           placeholder="Senha do usuário." />
+                                </div>
+                                <div class="input-prepend">
+                                    <span class="add-on">Senha (repetir): </span>
+                                    <input class="span6" name="user_passwordr" id="user_passwordr" autocomplete="off" type="password" 
+                                           placeholder="Repetir a senha informada acima." />
+                                </div>
+                                <br />
+                                <button type="submit" class="btn"><i class="icon-edit"></i> Atualizar Usuário</button>
+                                <button type="button" class="btn cancel"><i class="icon-edit"></i> Cancelar</button>
+                            </form> 
+                        </div>                            
+                    </div>                                     
+                </div>
+            </div>
+            <?php require_once 'footer.html'; ?>         
+        </div> <!--end main-->
+        <script type="text/javascript">
+            $("#menu-usuario").addClass('active');
+            $("#usuario-[user_tipo]").addClass('active');
+            window.onload = function () {
+                [msgOnload]
+            }
+            $(function () {
+                $('#user_level').val('[user_level]');
+            })
+        </script>
+    </body>
+</html>

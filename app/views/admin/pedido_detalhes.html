@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>[config_site_title] | Painel Administrativo</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script src="js/jquery/jquery-1.8.3.min.js" type="text/javascript"></script>
+        <script src="js/jquery/jquery-ui-1.9.2.js" type="text/javascript"></script>
+        <script src="js/admin/main.js" type="text/javascript"></script>
+        <script src="js/jquery/bootstrap/js/bootstrap.js" type="text/javascript"></script>
+        <link href="js/jquery/bootstrap/css/bootstrap.css" rel="stylesheet" />
+        <link href="js/jquery/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" />
+        <link href="css/admin/main.css" rel="stylesheet" />
+        <script src="js/jquery/jquery.price.js" type="text/javascript"></script>        
+        <script src="js/jquery/jquery.mask.js" type="text/javascript"></script>    
+        <script src="js/jquery/stupidtable.js" type="text/javascript"></script>
+        <script src="js/admin/cliente.js" type="text/javascript"></script>        
+    </head>
+    <body>
+        <div id="main">
+            <?php require_once 'menu_login.html'; ?>
+            <div class="row-fluid">
+                <div class="span2 pull-left">
+                    <?php require_once 'menu.html'; ?>
+                </div>                
+                <div class="span10 pull-right" id="sright">
+                    <div class="row-fluid">
+                        <div class="panel">
+                            <div class="title-grid-inverse">
+                                <i class="icon-shopping-cart icon-white"></i>  <b>Detalhes do Pedido Nº [pedido_id] - Lançado em [pedido_data] - Cliente [cliente_nome]</b>
+                            </div>
+                            <div class="box-cart">  
+                                <p>&nbsp;</p>
+                                <div class="span5 pull-left no-margin">
+                                    <form action="[baseUri]/admin/pedido/status/[pedido_id]/" method="post">                                        
+                                        <div class="input-prepend input-append">
+                                            <span class="add-on">Status do Pedido: </span>
+                                            <select name="pedido_status" id="pedido_status" class="span4">
+                                                <option value="1">Aguardando pagamento</option>
+                                                <option value="2">Em análise</option>
+                                                <option value="3">Aprovado</option>
+                                                <option value="4">Disponível</option>
+                                                <option value="5">Em disputa</option>
+                                                <option value="6">Devolvida</option>
+                                                <option value="7">Cancelada</option>
+                                            </select>
+                                            <button class="btn btn-inverse"><i class="icon-refresh icon-white"></i> Atualizar Status</button>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="span5 pull-right">
+                                    <span class="label">
+                                        ATUALIZADO EM [pedido_last_update]
+                                    </span>
+                                </div>
+                                <table cellpadding="0" cellspacing="0" border="0" class="table tabler table-striped border-bottom">
+                                    <thead>
+                                        <tr>
+                                            <th width="40">Pedido</th>
+                                            <th>Produtos</th>
+                                            <th width="40">Qtde</th>
+                                            <th>Valor Unitário</th>
+                                            <th>Valor Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!--{loop:cart}-->
+                                        <!--{<tr id="cart.lista_id">}-->
+                                        <!--{<td>cart.pedido_id</td>}-->
+                                        <!--{<td style="text-align:left"><a class="tips-top" title="ver dados do item" target="_blank" href="[baseUri]/admin/item/editar/cart.lista_item/">ID cart.lista_item - cart.lista_title cart.lista_atributo_ped</a></td>}-->
+                                        <!--{<td>}-->
+                                        <!--{<span class="input_qtde">cart.lista_qtde</span>}-->
+                                        <!--{</td>}-->
+                                        <!--{<td>}-->
+                                        <!--{<p>R$ cart.lista_preco</p>}-->
+                                        <!--{</td>}-->                            
+                                        <!--{<td>}-->
+                                        <!--{<p>R$ <span>cart.lista_total</span></p>}-->
+                                        <!--{</td>}-->                            
+                                        <!--{</tr>}-->
+                                        <!--{end:cart}-->
+                                    </tbody>
+                                    <tfoot>
+                                        <tr class="no-border">
+                                            <td>&nbsp;</td>
+                                            <td>&nbsp;</td>
+                                            <td>&nbsp;</td>
+                                            <td>&nbsp;</td>
+                                            <td class="th-reverse no-border">Produtos: R$ 
+                                                <span id="total_compra">[pedido_total_produto]</span></td>
+                                        </tr>   
+                                        <tr class="no-border [show-descontow] hide">
+                                            <td>&nbsp;</td>
+                                            <td>&nbsp;</td>
+                                            <td>&nbsp;</td>
+                                            <td>&nbsp;</td>
+                                            <td class="th-reverse" style="border-top: 0px solid #fff;">
+                                                Acréscimos:  [pedido_acrescimos]
+                                            </td>
+                                        </tr>            
+                                        <tr class="no-border [show-descontow]">
+                                            <td>&nbsp;</td>
+                                            <td><strong>Prazo: [pedido_prazo] </strong> </td>
+                                            <td>&nbsp;</td>
+                                            <td>&nbsp;</td>
+                                            <td class="th-reverse " style="border-top: 0px solid #fff;">
+                                                Descontos: -[pedido_cupom_desconto]
+                                            </td>
+                                        </tr>        
+                                        <tr class="no-border">
+                                            <td>&nbsp;</td>
+                                            <td>
+                                                <strong>
+                                                    [tipo_local] em: [endereco_rua], [endereco_num] 
+                                                    [endereco_complemento] - [endereco_bairro] - 
+                                                    [endereco_cidade] - [endereco_uf] - CEP [endereco_cep]
+                                                </strong>
+                                            </td>
+                                            <td>&nbsp;</td>
+                                            <td>&nbsp;</td>
+                                            <td class="th-reverse" style="border-top: 0px solid #fff;">
+                                                Subtotal: R$ [pedido_total_sem_frete]
+                                            </td>
+                                        </tr>                                             
+                                        <tr class="no-border">
+                                            <td>&nbsp;</td>
+                                            <td>
+                                                <strong>Pagamento Via: [pay_name] - Código [pedido_pay_code]</strong>
+                                                <span><Br>[pedido_pay_obs]</span>	
+                                                <span class="[cupom_desconto_anexo]"> &nbsp; &nbsp;
+                                                    <a class="btn btn-info btn-small" target="new" 
+                                                       href="fotos/comprovantes/[pedido_comprovante]">Ver comprovante</a>
+                                                </span>                                                
+                                            </td>
+                                            <td>&nbsp;</td>
+                                            <td>&nbsp;</td>
+                                            <td class="th-reverse">
+                                                <p>
+                                                    Frete: R$ <span id="total_compra">[pedido_frete]</span>
+                                                </p>
+                                            </td>
+                                        </tr>                                    
+                                        <tr class="no-border">
+                                            <td>&nbsp;</td>
+                                            <td>&nbsp;</td>
+                                            <td>&nbsp;</td>
+                                            <td>&nbsp;</td>
+                                            <td class="th-reverse" style="border-top: 0px solid #fff;">
+                                                Total: R$ <span id="total_compra">[pedido_total_frete]</span>
+                                            </td>
+                                        </tr>    
+                                        <tr>
+                                            <td>&nbsp;</td>
+                                            <td colspan="4">
+                                                <form class="form" method="post" action="[baseUri]/admin/pedido/rastreio/" >
+                                                    <div class="input-prepend input-append">
+                                                        <label>
+                                                            <strong class="font-12">Código de Rastreio Correios </strong>
+                                                            <br />
+                                                            <small>(Caso tenha postado o produto pelos correios, informe o código de rastreio)</small>
+                                                        </label>
+                                                        <input type="text" name="pedido_codigo_rastreio" value="[pedido_codigo_rastreio]"/>
+                                                        <input type="hidden" name="pedido_id" value="[pedido_id]"/>
+                                                        <button class="btn" type="submit">
+                                                            <i class="icon-refresh"></i> 
+                                                            gravar
+                                                        </button>
+                                                    </div>
+                                                    <p>&nbsp;</p>
+                                                    <div id="tbl-rastreio">
+                                                        [rastreio]
+                                                    </div>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>&nbsp;</td>
+                                            <td>
+                                                <div>
+                                                    <form class="form" method="post" action="[baseUri]/admin/pedido/observacao/">
+                                                        <label>
+                                                            <strong class="font-12">Observações </strong>
+                                                            <small>(anotações internas, não aparecem para o cliente)</small>
+                                                        </label>
+                                                        <textarea class="span9" rows="4" name="pedido_obs" id="pedido_obs">[pedido_obs]</textarea>
+                                                        <input type="hidden" name="pedido_id" value="[pedido_id]"/>
+                                                        <br />
+                                                        <button class="btn" type="submit">
+                                                            <i class="icon-comment"></i> 
+                                                            gravar
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            </td>
+                                            <td>&nbsp;</td>
+                                            <td>&nbsp;</td>
+                                            <td>&nbsp;</td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                                <p>
+                                    <br />
+                                    <a href="[baseUri]/admin/pedido/" class="btn btn-small"><i class="icon-fire"></i> Voltar para Pedidos</a>
+                                    <a target="_blank" href="[baseUri]/admin/pedido/imprimir/[pedido_id]" class="btn btn-small"><i class="icon-print"></i> Imprimir Pedido</a>
+
+                                </p>                                    
+                            </div>
+                        </div>                            
+                    </div>                                     
+                </div>
+            </div>
+            <?php require_once 'footer.html'; ?>           
+        </div> <!--end main-->
+        <div class="modal hide fade" id="modal-remove">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h5><img src="images/icons/alert.png" /> Remover Cliente</h5>
+            </div>
+            <div class="modal-body">
+                <p>Você está prestes a remover um cliente e todos os seus pedidos!</p>
+                <p>Deseja realmente prosseguir?</p>
+            </div>
+            <div class="modal-footer">
+                <a href="javascript:void(0);" onclick="$('#modal-remove').modal('hide')" class="btn btn-small">Cancelar</a>
+                <a href="javascript:void(0);" id="btn-remove" class="btn btn-small btn-danger">Confirmar Remoção</a>
+            </div>
+        </div>      
+        <script type="text/javascript">
+            $("#menu-pedido").addClass('active');
+            $("#pedido-lista").addClass('active');
+            window.onload = function () {
+                [msgOnload]
+            }
+            $('#tbl-rastreio').addClass('table');
+            $('#tbl-rastreio').css('width', '100%');
+            $('#pedido_status').val('[pedido_status]');
+        </script>
+    </body>
+</html>

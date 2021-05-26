@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Finalização de Compra | [config_site_title]</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="description" content="[config_site_description]">
+        <meta name="application-name" content="Plataforma Flux Shop">
+        <link rel="icon" type="image/png" sizes="16x16" href="[baseUri]/app/images/layout/favicon.png" />
+        <meta name="author" content="[config_site_title]">
+        <link href="js/jquery/bootstrap-3.3.6/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="js/jquery/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+        <link href="css/public/main.css" rel="stylesheet" type="text/css"/>
+        <style>#main{min-height: 300px;}</style>
+        <script src="js/jquery/jquery-1.11.3.min.js" type="text/javascript"></script>
+        <link href="css/public/tema.php?bd=[config_color_bd]&bh=[config_color_bh]&cd=[config_color_cd]&ch=[config_color_ch]&bk=[config_color_bk]&bt=[config_color_top]" rel="stylesheet" type="text/css"/>
+        <script src="js/public/ga.js" type="text/javascript"></script>
+    </head>
+    <body>
+        <?php include 'topo.html'; ?>
+        <div class="container vitrine-mod-2">
+            <div id="main">
+                <ul class="breadcrumb">
+                    <li class="hidden-xs"><a href="[baseUri]/">Home</a></li>
+                    <li class="hidden-xs"><a href="[baseUri]/carrinho/">Meu Carrinho</a></li>
+                    <li class="hidden-xs"><a href="[baseUri]/finalizar/entrega/">Opções de entrega</a></li>
+                    <li class="active"><a>Opções de pagamento</a></li>
+                </ul>
+                <div class="status-compra pagamento"></div>
+                <div class="page-content no-margin">
+                    <p>&nbsp;</p>
+                    <div class="tab-pane" id="end2">
+                        <form action="[baseUri]/finalizar/confirmar/" method="post" id="form-pagamento">
+                            <div id="finaliza-pagamento" class="border-bottom">
+                                <div class="form-group">
+                                    <p class="font-16">Selecione um método de pagamento:</p>
+                                </div>
+                                <div class="container">
+                                    <div class="form-group">
+                                        <label class="radio" id="cielo">
+                                            <input type="radio" class="metodo-pagamento" name="pagamento"  value="cielo">
+                                            <b>Cielo em Até 10x s/ juros* Pague com Cartão de Crédito</b> <br/>
+                                            <i class="icon-info-sign"></i> Você poderá utilizar Cartão de Crédito.
+                                            E contar com toda segurança e eficiência da Cielo.<br/>
+                                            <!-- <img src="helpers/cielo/img/logo.png" alt="" style="margin-top: 10px"/> -->
+                                        </label>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="radio" id="pagseguro">
+                                            <input type="radio" class="metodo-pagamento" name="pagamento"  value="pagseguro">
+                                            <b>Pagar com PagSeguro</b> <br/>
+                                            <i class="icon-info-sign"></i> Você poderá utilizar Cartão de Crédito<span>,Transferência Bancária,
+                                                Boleto Bancário ou Depósito</span>. Além de contar com toda segurança da UOL.<br/>
+                                            <!-- <img src="helpers/pagseguro/img/pagseguro.gif"  alt="" style="margin-top: 10px"/> -->
+                                        </label>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="radio" id="deposito">
+                                            <input type="radio" class="metodo-pagamento" name="pagamento"  value="deposito">
+                                            <b>Depósito ou Transferência Bancária</b> <br/>
+                                            <i class="icon-info-sign"></i> Você poderá depositar ou transferir para: <b> [banco_deposito] </b>
+                                            <!-- <img src="helpers/deposito/img/logo.png" alt="" style="margin-top: 10px"/> -->
+                                            <br/>
+                                        </label>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="radio" id="boleto">
+                                            <input type="radio" class="metodo-pagamento" name="pagamento"  value="boleto">
+                                            <b>Boleto Bancário - [boleto_desconto]% de desconto</b> <br/>
+                                            <i class="icon-barcode"></i> Você poderá pagar com boleto bancário até o vencimento com [boleto_desconto]% de desconto.
+                                            <!-- <img src="helpers/deposito/img/logo.png" alt="" style="margin-top: 10px"/> -->
+                                            <br/>
+                                        </label>
+                                    </div>
+                                </div>
+                                <p>&nbsp;</p>
+                            </div>
+                            <p>&nbsp;</p>
+                            <div class="pull-right">
+                                <button class="btn btn-success btn-lg"  data-loading-text="Processando..."
+                                        id="btn-finaliza" disabled="disabled"><i class="fa fa-clock-o"></i> Aguardando seleção de pagamento</button>
+                            </div>
+                            <p>&nbsp;</p>
+                            <p>&nbsp;</p>
+                            <p>&nbsp;</p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="pushfooter"></div>
+        <br/><br/><br/><br/><br/>
+        <?php include 'footer.html'; ?>
+        <script src="js/public/finalizar.js" type="text/javascript"></script>
+        <script>[msg_error]</script>
+        <script>[evt_onload]</script>
+        <script>[disableMod]</script>
+    </body>
+</html>

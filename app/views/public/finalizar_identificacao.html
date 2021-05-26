@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Finalização de Compra | [config_site_title]</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />     
+        <meta name="description" content="[config_site_description]">
+        <meta name="application-name" content="Plataforma Flux Shop">
+        <link rel="icon" type="image/png" sizes="16x16" href="[baseUri]/app/images/layout/favicon.png" />
+        <meta name="author" content="[config_site_title]">
+        <link href="js/jquery/bootstrap-3.3.6/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="js/jquery/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+        <link href="css/public/main.css" rel="stylesheet" type="text/css"/>  
+        <script src="js/jquery/jquery-1.11.3.min.js" type="text/javascript"></script>    
+        <link href="css/public/tema.php?bd=[config_color_bd]&bh=[config_color_bh]&cd=[config_color_cd]&ch=[config_color_ch]&bk=[config_color_bk]&bt=[config_color_top]" rel="stylesheet" type="text/css"/>  
+        <script src="js/public/ga.js" type="text/javascript"></script>
+    </head>
+    <body>
+        <?php include 'topo.html'; ?>
+        <div class="container">
+            <div id="main">
+                <div class="status-compra identificacao vitrine-mod-2"></div>
+                <ul class="breadcrumb ">
+                    <li class="active"><a><i class="fa fa-info-circle"></i> Identificação [config_site_title]</a></li>
+                </ul> 
+                <div class="well well-sm">
+                    <form class="form" method="post" action="[baseUri]/finalizar/" autocomplete="off" >
+                        [message_login] <br />
+                        <label><b>Qual é seu e-mail?</b></label>
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                            <input id="cliente_email" name="cliente_email" type="email" placeholder="informe seu e-mail" class="form-control" required value="[cliente_email]">
+                        </div>
+                        <p>&nbsp;</p>
+                        <label><b>Você Já possui senha na [config_site_title]? </b></label>
+                        <div class="control-group mar-left-20">
+                            <label class="radio" for="cadastrar">
+                                <input type="radio" id="cadastrar" class="cad" name="cliente_cadastrado" value="nao">
+                                Não, mas quero criar minha conta.
+                            </label>
+                            <label class="radio" for="cadastrado">
+                                <input type="radio" id="cadastrado" class="cad" name="cliente_cadastrado" value="sim" checked="checked">
+                                <b>Sim</b>, minha senha é:
+                            </label>
+                        </div>
+                        <div class="input-group control-group mar-top-10">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                            <input id="cliente_password" name="cliente_password" type="password" placeholder="informe sua senha" class="form-control">
+                        </div>
+                        <a href="[baseUri]/cliente/recuperar/senha/" class="mar-left-10" ><i>Esqueci minha senha</i></a>
+                        <p>&nbsp;</p>
+                        <div class="row">
+                            <div class="col-sm-6 controls hidden-xs">
+                                <button class="btn btn-custom"><i class="fa fa-caret-square-o-right"></i> Continuar</button>
+                                <input type="hidden" name="url_retorno" id="url_retorno" value="[baseUri]/finalizar/" />
+                            </div>
+                            <div class="col-xs-12 visible-xs">
+                                <div class="form-group">
+                                    <div class="controls text-center">
+                                        <button class="btn btn-custom"><i class="fa fa-caret-square-o-right"></i> Continuar</button>
+                                        <input type="hidden" name="url_retorno" id="url_retorno" value="[baseUri]/finalizar/" />
+                                    </div>
+                                </div>
+                                <br/>      
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>                
+        </div><br/><br/><br/><br/>            
+        <?php include 'footer.html'; ?>     
+        <script src="js/public/finalizar.js" type="text/javascript"></script>        
+        <script>[msg_error]</script>        
+    </body>
+</html>

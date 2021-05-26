@@ -1,0 +1,131 @@
+<html>
+    <head>
+        <title>[config_site_title]</title>
+        <link href="js/jquery/bootstrap-3.3.6/css/bootstrap.css" rel="stylesheet" type="text/css" />
+        <style type="text/css">
+            .invoice-title h2, .invoice-title h3 {
+                display: inline-block;
+            }
+            .table > tbody > tr > .no-line {
+                border-top: none;
+            }
+            .table > thead > tr > .no-line {
+                border-bottom: none;
+            }
+            .table > tbody > tr > .thick-line {
+                border-top: 2px solid;
+            }
+        </style>
+    </head>
+    <body>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-md-12">
+                    <div class="invoice-title">
+                        <h2> Pedido # [pedido_id]</h2>
+                        <h3 class="pull-right"><br>Status do Pedido: [pedido_status]</h3>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <address>
+                                <strong>Faturado para:</strong><br>
+                                [cliente_nome] [cliente_sobrenome]<br>
+                                [tipo_local] em: [endereco_rua], [endereco_num]<br>
+                                [endereco_bairro] - [endereco_cidade] - [endereco_uf] <br>
+                                CEP [endereco_cep]
+                            </address>
+                        </div>
+                        <div class="col-xs-6 text-right">
+                            <address>
+                                <strong>Data do pedido:</strong><br>
+                                [pedido_data]<br><br>
+                            </address>                            
+                            <address class="hide">
+                                <strong>Entregar para:</strong><br>
+                                [cliente_nome] [cliente_sobrenome]<br>
+                                [tipo_local] em: [endereco_rua], [endereco_num]<br>
+                                [endereco_bairro] - [endereco_cidade] - [endereco_uf] <br>
+                                CEP [endereco_cep]
+                            </address>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-8">
+                            <address>
+                                <strong>Método de Pagamento:</strong><br>
+                                [pay_name] - [pedido_pay_obs]<br>
+                            </address>
+                        </div>
+                        <div class="col-xs-4 text-right">
+                            <address class="hide">
+                                <strong>Data do pedido:</strong><br>
+                                [pedido_data]<br><br>
+                            </address>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><strong>Itens do Pedido</strong></h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-condensed">
+                                    <thead>
+                                        <tr>
+                                            <td><strong>Item</strong></td>
+                                            <td class="text-center"><strong>Preço</strong></td>
+                                            <td class="text-center"><strong>Quantidade</strong></td>
+                                            <td class="text-right"><strong>Total</strong></td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!--{loop:cart}-->
+                                        <tr>
+                                            <td>Ref: cart.item_ref - cart.lista_title cart.lista_atributo_ped</td>
+                                            <td class="text-center">cart.lista_preco</td>
+                                            <td class="text-center">cart.lista_qtde</td>
+                                            <td class="text-right">cart.lista_total</td>
+                                        </tr>
+                                        <!--{end:cart}-->                                        
+                                        <tr>
+                                            <td class="thick-line"></td>
+                                            <td class="thick-line"></td>
+                                            <td class="thick-line text-center"><strong>Subtotal</strong></td>
+                                            <td class="thick-line text-right">R$ [pedido_total_produto]</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="no-line"></td>
+                                            <td class="no-line"></td>
+                                            <td class="no-line text-center"><strong>Descontos</strong></td>
+                                            <td class="no-line text-right">R$ [pedido_cupom_desconto]</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="no-line"></td>
+                                            <td class="no-line"></td>
+                                            <td class="no-line text-center"><strong>Frete</strong></td>
+                                            <td class="no-line text-right">R$ [pedido_frete]</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="no-line"></td>
+                                            <td class="no-line"></td>
+                                            <td class="no-line text-center"><strong>Total</strong></td>
+                                            <td class="no-line text-right" width="100">R$ [pedido_total_frete]</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript">window.print();</script>
+    </body>
+</html>

@@ -1,0 +1,98 @@
+/* INSTRUÇÕES PARA MIGRAR FLUX 2.8 PARA 3.0 
+
+	ATENÇÃO:
+	ESTE PROCEDIMENTO IRÁ REMOVER E RECRIAR SUA TABELA DE CONFIGURAÇÕES DE PAGAMENTO, ANTES DE REALIZAR, TENHA EM MÃO TODAS AS SUAS CREDENCIAIS (PAGSEGURO, MERCADOPAGO, TRANSF.)
+	PARA RECADASTRAR ESTES DADOS!!! 
+
+	ANTES DE COMEÇAR, FAÇA UM BACKUP DE SEU BANCO DE DADOS!!! 
+	PARA MIGRAR, BASTA COPIAR O TRECHO DE SQL ABAIXO E EXECUTAR EM SEU BANCO DE DADOS DA LOJA
+
+	NOS ISENTAMOS DA RESPONSABILIDADE SOBRE OS DADOS DE SEU BD, A MIGRAÇÃO É FEITA POR SUA CONTA E RISCO.
+	CASO NÃO SAIBA O QUE ESTÁ FAZENDO, ENTRE EM CONTATO COM O SUPORTE@PHPSTAFF.COM.BR OU EM UM DE NOSSOS TELEFONES PARA SOCILICITAR SUA MIGRAÇÃO MEDIANTE ORÇAMENTO!
+
+*/
+
+
+
+
+DROP TABLE pay;
+
+CREATE TABLE IF NOT EXISTS `pay` (
+  `pay_id` int(11) NOT NULL primary key,
+  `pay_name` varchar(100) DEFAULT NULL,
+  `pay_key` varchar(100) DEFAULT NULL,
+  `pay_user` varchar(100) DEFAULT NULL,
+  `pay_pass` varchar(100) DEFAULT NULL,
+  `pay_retorno` varchar(200) DEFAULT NULL,
+  `pay_status` int(11) DEFAULT '1' COMMENT '2=desativado',
+  `pay_url_redir` varchar(600) DEFAULT NULL,
+  `pay_fator_juros` varchar(1000) DEFAULT '1.00000, 0.52255, 0.35347, 0.26898, 0.21830, 0.18453, 0.16044, 0.14240, 0.12838, 0.11717, 0.10802, 0.10040 ',
+  `pay_texto` text,
+  `pay_c1` varchar(200) DEFAULT NULL,
+  `pay_c2` varchar(200) DEFAULT NULL,
+  `pay_c3` varchar(200) DEFAULT NULL,
+  `pay_c4` varchar(200) DEFAULT NULL,
+  `pay_c5` varchar(200) DEFAULT NULL,
+  `pay_c6` varchar(200) DEFAULT NULL,
+  `pay_c7` varchar(200) DEFAULT NULL,
+  `pay_c8` varchar(400) DEFAULT NULL,
+  `pay_c9` varchar(200) DEFAULT NULL,
+  `pay_d1` varchar(200) DEFAULT NULL,
+  `pay_d2` varchar(200) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+
+
+INSERT INTO `pay` (`pay_id`, `pay_name`, `pay_key`, `pay_user`, `pay_pass`, `pay_retorno`, `pay_status`, `pay_url_redir`, `pay_fator_juros`, `pay_texto`, `pay_c1`, `pay_c2`, `pay_c3`, `pay_c4`, `pay_c5`, `pay_c6`, `pay_c7`, `pay_c8`, `pay_c9`, `pay_d1`, `pay_d2`) VALUES
+(1, 'PagSeguro', 'pagseguro', 'suporte@lojamodelo.com.br', NULL, '', 1, NULL, '20', NULL, '2', '0', '1', '2', 'SANDBOX', '12', NULL, NULL, NULL, NULL, NULL),
+(3, 'Cielo', '25fbb99741c739dd84d7b06ec78c9bac718838630f30b112d033ce2e621b34f3', '1006993069', '2', 'http://localhost/projetos/fluxshop-2.8-dev/notificacao/', 1, '12', '5', 'Cartão de Crédito', '6', '0', '10', 'visa,mastercard,elo,amex,diners', '20.00', '2', NULL, NULL, NULL, NULL, NULL),
+(4, 'Deposito', '6253', 'Itaú, Caixa', '33300.6', 'http://[baseUri]/notificacao/', 1, '', 'Rafael Clares Diniz', 'Banco Itaú\r\nAgência: 7589\r\nConta Corrente: 12457-6\r\nTitular: PHP STAFF LTDA.', '4', '0', '18', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(5, 'Boleto', 'PHP STAFF LTDA.', 'Bradesco', '001.002.003-44', '', 0, NULL, '0', 'Boleto Bradesco', '1234', '5', '9876', '5', '107', '09.876.543/0001-99', 'Av. Paulista, 300', '11701-380', 'São Paulo', 'SP', '5'),
+(6, 'Config', 'mercadoPago', 'pagseguro', NULL, '', 1, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(7, 'MercadoPago', 'TEST-50e65373-2094-4638-bbd6-611d8fcaa4aa', 'TEST-8185223480953416-051411-6af2ddf9b5d93a7597c33f0553fa4563-147SS738', NULL, '', 1, NULL, '7', NULL, NULL, NULL, '1', NULL, 'SANDBOX', NULL, NULL, NULL, NULL, NULL, NULL);
+
+
+
+
+CREATE TABLE faixacep
+(
+    faixacep_id int PRIMARY KEY AUTO_INCREMENT,
+    faixacep_cep_inicio varchar(20) DEFAULT null,
+    faixacep_cep_final varchar(20) DEFAULT null,
+    faixacep_desc varchar(200) DEFAULT null ,
+    faixacep_peso_de varchar(20) DEFAULT 0,
+    faixacep_peso_ate varchar(20) DEFAULT 10,
+    faixacep_valor varchar(20) DEFAULT null ,
+    faixacep_prazo varchar(255) DEFAULT null
+);
+
+
+ALTER TABLE `frete` ADD `frete_jamef_nome` VARCHAR(200) NULL DEFAULT 'TRANSPORTADORA JAMEF';
+ALTER TABLE `frete` ADD `frete_jamef_user` VARCHAR(200) NULL DEFAULT NULL;
+ALTER TABLE `frete` ADD `frete_jamef_cnpj` VARCHAR(200) NULL DEFAULT NULL;
+ALTER TABLE `frete` ADD `frete_jamef_filial` VARCHAR(200) NULL DEFAULT NULL;
+ALTER TABLE `frete` ADD `frete_jamef_ativo` INT(1) NULL DEFAULT 0;
+
+ALTER TABLE `frete` ADD `frete_redecargo_nome` VARCHAR(200) NULL DEFAULT 'TRANSPORTADORA REDECARGO';
+ALTER TABLE `frete` ADD `frete_redecargo_chave` VARCHAR(200) NULL DEFAULT NULL;
+ALTER TABLE `frete` ADD `frete_redecargo_ativo` INT(1) NULL DEFAULT 0;
+
+ALTER TABLE `frete` ADD `frete_dlog_nome` VARCHAR(200) NULL DEFAULT 'TRANSPORTADORA DLOG';
+ALTER TABLE `frete` ADD `frete_dlog_login` VARCHAR(200) NULL DEFAULT NULL;
+ALTER TABLE `frete` ADD `frete_dlog_token` VARCHAR(200) NULL DEFAULT NULL;
+ALTER TABLE `frete` ADD `frete_dlog_ativo` INT(1) NULL DEFAULT 0;
+
+
+ALTER TABLE `frete` ADD `frete_tnt_nome` VARCHAR(200) NULL DEFAULT 'TRANSPORTADORA TNT';
+ALTER TABLE `frete` ADD `frete_tnt_login` VARCHAR(200) NULL DEFAULT NULL;
+ALTER TABLE `frete` ADD `frete_tnt_remid` VARCHAR(200) NULL DEFAULT NULL;
+ALTER TABLE `frete` ADD `frete_tnt_ie` VARCHAR(200) NULL DEFAULT NULL;
+ALTER TABLE `frete` ADD `frete_tnt_tipo` VARCHAR(200) NULL DEFAULT 'RNC';
+ALTER TABLE `frete` ADD `frete_tnt_tipo_frete` VARCHAR(200) NULL DEFAULT 'C';
+ALTER TABLE `frete` ADD `frete_tnt_tributaria` VARCHAR(200) NULL DEFAULT 'CO';
+ALTER TABLE `frete` ADD `frete_tnt_divisao` VARCHAR(200) NULL DEFAULT '1';
+ALTER TABLE `frete` ADD `frete_tnt_ativo` INT(1) NULL DEFAULT 0;
+
+
+UPDATE versao SET versao_update = '3.0', versao_num = 300;
+
+ALTER TABLE `slide` ADD `slide_pos` INT(5) NOT NULL DEFAULT '0';

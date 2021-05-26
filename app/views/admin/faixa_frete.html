@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>[config_site_title] | Painel Administrativo</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <script src="js/jquery/jquery-1.8.3.min.js" type="text/javascript"></script>
+    <script src="js/jquery/jquery-ui-1.9.2.js" type="text/javascript"></script>
+    <script src="js/admin/main.js" type="text/javascript"></script>
+    <script src="js/jquery/bootstrap/js/bootstrap.js" type="text/javascript"></script>
+    <link href="js/jquery/bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <link href="js/jquery/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" />
+    <link href="css/admin/main.css" rel="stylesheet" />
+    <script src="js/jquery/jquery.price.js" type="text/javascript"></script>
+    <script src="js/jquery/jquery.mask.js" type="text/javascript"></script>
+    <script src="js/admin/faixacep.js" type="text/javascript"></script>
+    <script src="js/jquery/validate/jquery.validate.js" type="text/javascript"></script>
+</head>
+<body>
+
+<div class="" id="main">
+    <?php require_once 'menu_login.html'; ?>
+    <div class="row-fluid">
+        <div class="span2 pull-left">
+            <?php require_once 'menu.html'; ?>
+        </div>
+
+        <div class="span10 pull-right" id="sright">
+            <div class="row-fluid">
+                <div class="panel">
+                    <div class="title-grid-inverse">
+                        <i class="icon-user icon-white"></i>  <b>Frete Diferenciado</b>
+                    </div>
+                    <p class="well well-small">
+                        <i class="icon-info-sign"></i>
+                        Você deve informar o range de cep do local (inicial e final). <br/>
+                        <b>Este procedimento é necessário para haver precisão na consulta do frete. </b> <br/>
+                        Quando o cliente informar o cep para cálculo do frete, o sistema irá primeiramente buscar Frete Diferenciado antes de efetuar o cálculo dos Correios.
+                    </p>
+
+                    <form id="f-cliente" name="f-cliente" method="post" class="validate accept-opacity" action="[baseUri]/admin/faixacep/incluir/">
+                        <p class="title-grid font-small" style="margin-top: 0px !important;margin-bottom: 5px !important;">
+                            <i class="icon-map-marker"></i>
+                            <b>Nova Faixa de Cep</b>
+                        </p>
+
+                        <div class="input-prepend input-append">
+                            <span class="add-on">CEP início</span>
+                            <input type="text" name="faixacep_cep_inicio" id="faixacep_cep_inicio" class="required cep"  placeholder="Informe a faixa de CEP inicial"
+                                   style="width:282px" required="required" />
+                            &nbsp;
+                        </div>
+
+                        <div class="input-prepend input-append">
+                            <span class="add-on">CEP Final</span>
+                            <input type="text" name="faixacep_cep_final" id="faixacep_cep_final" class="required cep"  placeholder="Informe a faixa de CEP final"
+                                   style="width:282px" required="required" />
+                            &nbsp;
+                        </div>
+
+                        <div class="input-prepend">
+                            <span class="add-on">Descrição</span>
+                            <input type="text" name="faixacep_desc" id="faixacep_desc" class="required span5"  placeholder="Informe a descrição do frete ex: Motoboy, Ecomenda comum, Entrega Expess" required="required"/>
+                        </div>
+
+                        <div class="input-prepend">
+                            <span class="add-on">Peso De (g)</span>
+                            <input type="text" name="faixacep_peso_de" id="faixacep_peso_de" class="span5 price"
+                                   placeholder="Informe o peso em gramas ex.: 0.3(300 g) 1.00(1 KG)" data-original-title value="0,00" />
+                        </div>
+
+                        <div class="input-prepend">
+                            <span class="add-on">Peso Até (g)</span>
+                            <input type="text" name="faixacep_peso_ate" id="faixacep_peso_ate" class="span5 price"
+                                   placeholder="Informe o peso em gramas ex.: 0.3(300 g) 1.00(1 KG)" data-original-title value="1,00" />
+                        </div>
+
+                        <div class="input-prepend">
+                            <span class="add-on">Valor</span>
+                            <input type="text" name="faixacep_valor" id="faixacep_valor" class="price span5"
+                                   placeholder="Informe o valor cobrado ou 0,00" value="0,00" />
+                        </div>
+
+                        <div class="input-prepend">
+                            <span class="add-on">Prazo De:</span>
+                            <input type="text" name="faixacep_prazo" id="faixacep_prazo" class="span5"
+                                   placeholder="Informe o prazo estimado em dias. ex: 7 ou de 7 a 14 dias" value="" required="required"/>
+                        </div>
+
+                        <div class="input-prepend input-append">
+                            <button class="btn btn-success"><i class="icon-white icon-plus-sign"></i> Cadastrar Faixa de CEP</button>
+                        </div>
+                    </form>
+                    <div class="accordion accept-opacity" id="accordion">
+                        <!--{loop:addr}-->
+                        <!--{<div class="accordion-group">}-->
+                        <!--{<div class="accordion-heading" style="background:#475055;color:white">}-->
+                        <!--{<a class="accordion-toggle font-white" data-toggle="collapse" data-parent="#accordion" href="#col-addr.faixacep_id">}-->
+                        <!--{<i class="icon-map-marker icon-white"></i> addr.faixacep_desc}-->
+                        <!--{</a>}-->
+                        <!--{</div>}-->
+                        <!--{<div id="col-addr.faixacep_id" class="accordion-body collapse">}-->
+                        <!--{<div class="accordion-inner">}-->
+                        <!--{<form id="f-cliente-addr.faixacep_id" class="form-edit" method="post" class="validate" action="[baseUri]/admin/faixacep/atualizar/addr.faixacep_id/">}-->
+                        <!--{<p class="title-grid font-small hide" style="width:428px;margin-top: 30px !important;margin-bottom: 5px !important;"><i class="icon-map-marker"></i>  Cobertura addr.faixacep_cobertura</p>}-->
+                        <!--{<div class="input-prepend">}-->
+                        <!--{<span class="add-on my-add-on">CEP inicio</span>}-->
+                        <!--{<input type="text" name="faixacep_cep_inicio" id="faixacep_cep_inicio" class="cep required span5" maxlength="9" value="addr.faixacep_cep_inicio" placeholder="informe seu cep" />}-->
+                        <!--{</div>}-->
+
+                        <!--{<div class="input-prepend">}-->
+                        <!--{<span class="add-on my-add-on">CEP Final</span>}-->
+                        <!--{<input type="text" name="faixacep_cep_final" id="faixacep_cep_final" class="cep required span5" maxlength="9" value="addr.faixacep_cep_final" placeholder="informe seu cep" />}-->
+                        <!--{</div>}-->
+
+
+                        <!--{<div class="input-prepend">}-->
+                        <!--{<span class="add-on my-add-on">Descrição</span>}-->
+                        <!--{<input type="text" name="faixacep_desc" id="faixacep_desc" class="required span5" value="addr.faixacep_desc" placeholder="Informe a descri?o do frete ex: Motoboy, Ecomenda comum, Entrega Expess" />}-->
+                        <!--{</div>}-->
+
+
+                        <!--{<div class="input-prepend">}-->
+                        <!--{<span class="add-on my-add-on">Peso De (g) &nbsp&nbsp&nbsp</span>}-->
+                        <!--{<input type="text" name="faixacep_peso_de" id="faixacep_peso_de" class="span5 price"  value="addr.faixacep_peso_de" placeholder="informe o valor ou 0,00" />}-->
+                        <!--{</div>}-->
+                        <!--{<div class="input-prepend">}-->
+                        <!--{<span class="add-on my-add-on">Peso Até (g) &nbsp&nbsp&nbsp</span>}-->
+                        <!--{<input type="text" name="faixacep_peso_ate" id="faixacep_peso_ate" class="span5 price"  value="addr.faixacep_peso_ate" placeholder="informe o valor ou 0,00" />}-->
+                        <!--{</div>}-->
+
+                        <!--{<div class="input-prepend">}-->
+                        <!--{<span class="add-on my-add-on">Valor &nbsp&nbsp&nbsp</span>}-->
+                        <!--{<input type="text" name="faixacep_valor" id="faixacep_valor" class="span5 price"  value="addr.faixacep_valor" placeholder="informe o valor ou 0,00" />}-->
+                        <!--{</div>}-->
+
+                        <!--{<div class="input-prepend">}-->
+                        <!--{<span class="add-on my-add-on">Prazo De</span>}-->
+                        <!--{<input type="text" name="faixacep_prazo" id="faixacep_prazo" class="span5"  value="addr.faixacep_prazo" placeholder="1 a 7 dias úteis " />}-->
+                        <!--{</div>}-->
+
+                        <!--{</div>}-->
+                        <!--{<p style="margin-top: 5px; margin-left:15px">}-->
+                        <!--{<button class="btn btn-mini"><i class="icon-refresh"></i> Atualizar Local</button> }-->
+                        <!--{<button class="btn btn-mini remove" id="addr.faixacep_id"><i class="icon-trash"></i> Remover Local</button>}-->
+                        <!--{</p>}-->
+                        <!--{</form>}-->
+                        <!--{</div>}-->
+                        <!--{</div>}-->
+
+                        <!--{end:addr}-->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row-fluid">
+        <div class="span12 bar"></div>
+    </div>
+
+    <div class="row-fluid">
+        <div id="footer"></div>
+    </div>
+
+</div> <!--row-flui-->
+</div> <!--end main-->
+<div class="modal hide fade" id="modal-remove">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h5><img src="images/icons/alert.png" /> Remover Local</h5>
+    </div>
+    <div class="modal-body">
+        <p>
+            Você está prestes a remover permanentemente esse registro!
+        </p>
+        <p>Deseja realmente prosseguir?</p>
+    </div>
+    <div class="modal-footer">
+        <a href="javascript:void(0);" onclick="$('#modal-remove').modal('hide')" class="btn btn-small">Cancelar</a>
+        <a href="javascript:void(0);" id="btn-remove" class="btn btn-small btn-danger">Confirmar Remoção</a>
+    </div>
+</div>
+
+<script>
+    $("#menu-frete").addClass('active');
+    $("#frete-opcoes").addClass('active');
+    $(function(){
+        $('.form-edit #faixacep_cidade').attr('readonly','readonly');
+        $('.form-edit #faixacep_bairro').attr('readonly','readonly');
+        $('.form-edit #faixacep_uf').attr('readonly','readonly');
+        $('.m-numeric').mask('00');
+        [msg_error]
+    })
+    window.onload = function(){
+        [msgOnload]
+    }
+</script>
+</body>
+</html>

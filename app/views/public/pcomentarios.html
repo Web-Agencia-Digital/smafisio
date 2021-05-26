@@ -1,0 +1,30 @@
+<style>.coments{color: #048FD2!important;text-decoration: none!important;}</style>
+<br>
+<!--{loop:av}-->
+<!--{<div class="col-md-12">}-->
+<!--{<p><input value="av.avaliacao_nota" type="number"  data-language="pt" disabled="disabled" class="rating-input-pequeno" min=0 max=5 step=1 data-size="xs"></p>}-->
+<!--{<p><i class="fa fa-user fa-fw"></i> av.cliente_nome  <small>av.avaliacao_data</small> <br> av.avaliacao_comentario</p>}-->
+<!--{<br>}-->
+<!--{</div>}-->
+<!--{end:av}-->
+
+<div class="col-md-12" id="form-avaliacao">
+    <br>
+    <p>[showmsg]</p>
+    <div class="show_avaliacao">
+        <i class="fa fa-star fa-fw"></i> Avaliar
+        <br>
+        <input id="rating-input" type="number" required data-language="pt" class="rating-normal" min=0 max=5 step=1 data-size="xs" >
+        <br>                                                           
+        <div class="form-group pull-in clearfix">
+            <div class="col-sm-60 m-b-md">
+                <input type="hidden" id="id_prod" value="[item_id]">
+                <textarea required class="form-control" rows="3" placeholder="Digite seu comentário" id="comentario" name="comentario"></textarea><br>
+                <button style="margin: 0px" type="button" id="btnGravarComent" class="btn btn-primary pull-right"><i class="fa fa-star"></i> Enviar Avaliação</button>
+            </div>
+        </div>
+    </div>
+    <br />
+    <br />
+</div>
+<br />

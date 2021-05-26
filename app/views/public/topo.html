@@ -1,0 +1,138 @@
+<style>
+.bg-bd{background:#[config_color_bd] !important;}
+.bg-bh{background:#[config_color_bh] !important;}
+.bg-cd{background:#[config_color_cd] !important;}
+.bg-ch{background:#[config_color_ch] !important;}
+.bg-bk{background:#[config_color_bk] !important;}
+.bg-bt{background:#[config_color_top] !important;}
+</style>
+<div class="hide" id="modo-loja">[config_modo]</div>
+<div class="row">
+    <div role="navigation" id="fixed" class="navbar navbar-default navbar-fixed-top">
+        <div class="container{config_site_full}">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#drop-tabs">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="drop-tabs">
+                    <ul class="nav navbar-nav">
+                        <li class="logged logout hide"><a href="[baseUri]/cliente/logout/">SAIR</a></li>
+                        <li class="visible-xs vitrine"><a href="[baseUri]/carrinho/"><i class="fa fa-shopping-cart" style="font-size: 18px !important"></i> CARRINHO <?php  if(isset($_SESSION['cart']) && count($_SESSION['cart'])>=1){echo "(" .count($_SESSION['cart']) . ")"; } ?> </a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="[baseUri]/atendimento/"><i class="fa fa-envelope-o"></i> [config_site_email]</a></li>
+                        <li><a><i class="fa fa-phone"></i> [config_site_fone1]</a></li>
+                        <li><a class="link-whatsapp" data-phone="[config_site_fone2]"><i class="fa fa-whatsapp"></i> [config_site_fone2]</a></li>
+                        <li class="hide cart-hide"><a href="[baseUri]/carrinho/" class="btn-top-cart-sm"><i class="fa fa-shopping-cart" style="font-size: 18px !important"></i> <?php  if(isset($_SESSION['cart']) && count($_SESSION['cart'])>=1){echo "(" .count($_SESSION['cart']) . ")"; } ?> </a></li>
+                        <li class="hide compare-hide"><a href="[baseUri]/compara/" class="btn-top-compara-sm"><i class="fa fa-exchange" data-toggle="tooltip" title="comparar produtos" style="font-size: 18px !important"></i>
+                        <?php  if(isset($_SESSION['compara']) && count($_SESSION['compara'])>=1): ?>
+                        <?php echo "(" .count($_SESSION['compara']) . ")"; ?>
+                        <?php endif;?>
+                        </a></li>
+                    </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="top">
+    <div class="container{config_site_full}">
+        <div class="col-md-4 col-xs-12">
+        <div  id="logo-div" class="">
+            <a href="[baseUri]/">
+                <img src="images/layout/logo.png" class="img-responsive" alt="logo" />
+            </a>
+            <span class="hide hello-cliente">Olá [cliente_nome], bem-vindo de volta!</span>
+        </div>
+        </div>
+        <div class="col-md-4 col-xs-12 text-center">
+            <br>
+            <form action="[baseUri]/index/busca/" method="post">
+                <div id="custom-search-input">
+                    <div class="input-group col-md-12">
+                        <input type="text" class="form-control input-lg" name="busca" id="busca" value="[busca]" placeholder="O que você procura?"  x-webkit-speech="x-webkit-speech">
+                        <span class="input-group-btn">
+                            <button class="btn btn-info" type="submit">
+                                <i class="glyphicon glyphicon-search"></i>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-4 hidden-xs vitrine">
+            <div class="text-right">
+                <div class="row" style="margin-top: 10px">
+                    <div class="col-md-4 text-center">
+                        <a href="[baseUri]/cliente/" class="text-uppercase">
+                        <i class="fa fa-3x fa-user"></i><br>
+                            <span class="nologged">ENTRAR</span>
+                            <span class="logged">PEDIDOS</span>
+                        </a>
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <a href="[baseUri]/atendimento/" class="text-uppercase">
+                            <i class="fa fa-3x fa-question-circle"></i><br>
+                            Atendimento
+                        </a>
+                    </div>
+
+                    <div class="col-md-4 text-center">
+                        <a href="[baseUri]/carrinho/" class="text-uppercase">
+                            <i class="fa fa-shopping-bag fa-3x"></i><br>
+                            Carrinho
+                        </a>
+                        <?php  if(isset($_SESSION['cart']) && count($_SESSION['cart'])>=1){echo "(" .count($_SESSION['cart']) . ")"; } ?>
+
+                    </div>
+                    <div class="col-md-3 text-center">
+                        <?php  if(isset($_SESSION['compara']) && count($_SESSION['compara'])>=10): ?>
+                        <i class="fa fa-exchange fa-3x"></i> <br />
+                        <a href="[baseUri]/compara/compara" class="btn-top-compara text-uppercase">
+                            Compare <?php echo "(" .count($_SESSION['compara']) . ")"; ?>
+                        </a>
+                        <?php endif;?>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="navbar navbar-default" id="nav-categoria" role="navigation">
+    <div class="container{config_site_full}">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav2">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <div class="collapse navbar-collapse" id="nav2">
+            <ul class="nav navbar-nav" style="margin-left: 5px!important;">
+                <li class="hidden-xs hide"><a href="[baseUri]"><i class="fa fa-home"></i></a></li>
+                <li><a><i class="fa fa-bars"></i></a></li>
+                <!--{loop:cat}-->
+                <li class="dropdown cat.categoria_url">
+                    <a href="[baseUri]/index/categoria/cat.categoria_url/" class="dropdown-toggle text-uppercase" data-toggle="dropdown">
+                        <!--{cat.categoria_title}-->
+                    </a>
+                    <ul class="dropdown-menu" >
+                        <!--{loop:sub}-->
+                        <!--{<li><a href="[baseUri]/index/categoria/cat.categoria_url/cat.sub.sub_url/">cat.sub.sub_title</a></li>}-->
+                        <!--{end:sub}-->
+                        <!--{<li><a href="[baseUri]/index/categoria/cat.categoria_url/">Todo o departamento</a></li>}-->
+                    </ul>
+                </li>
+                <!--{end:cat}-->
+                <!--{loop:depto}-->
+                <!--{<li><a href="[baseUri]/index/categoria/depto.categoria_url/">depto.categoria_title</a></li>}-->
+                <!--{end:depto}-->
+            </ul>
+        </div>
+    </div>
+</div>

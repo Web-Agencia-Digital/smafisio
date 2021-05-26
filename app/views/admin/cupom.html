@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>[config_site_title] | Painel Administrativo</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script src="js/jquery/jquery-1.8.3.min.js" type="text/javascript"></script>
+        <script src="js/jquery/jquery-ui-1.9.2.js" type="text/javascript"></script>
+        <script src="js/admin/main.js" type="text/javascript"></script>
+        <script src="js/admin/cupom.js" type="text/javascript"></script>
+        <script src="js/jquery/bootstrap/js/bootstrap.js" type="text/javascript"></script>
+        <link href="js/jquery/bootstrap/css/bootstrap.css" rel="stylesheet" />
+        <link href="js/jquery/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" />
+        <script type="text/javascript" src="js/jquery/jquery.mask.js"></script>
+        <script src="js/jquery/validate/jquery.validate.js" type="text/javascript"></script>        
+        <script src="js/jquery/datepicker/js/bootstrap-datepicker.js"></script>		
+        <link href="js/jquery/datepicker/css/datepicker.css" rel="stylesheet">             
+        <link href="css/admin/main.css" rel="stylesheet" />
+        <style type="text/css">.legend{display: block;}</style>
+    </head>
+    <body>
+        <div id="main">
+            <?php require_once 'menu_login.html'; ?>
+            <div class="row-fluid">
+                <div class="span2 pull-left">
+                    <?php require_once 'menu.html'; ?>
+                </div>            
+                <div class="span10 pull-right" id="sright">
+                    <div class="row-fluid">
+                        <div class="panel">
+                            <div class="title-grid-inverse">
+                                <i class="icon-shopping-cart icon-white"></i>  <b>Cupons de Desconto [para]</b>
+                            </div>
+
+                            <div class="accordion-group">
+                                <div class="accordion-heading">
+                                    <a class="accordion-toggle panel-link" style="text-align: left !important" data-toggle="collapse" data-parent="#add-categoria" href="#collapseOne">
+                                        <i class="icon-plus-sign icon-white" ></i> <b>Criar Novo Cupom</b>
+                                    </a>
+                                </div>
+                                <div id="collapseOne" class="accordion-body in collapse">
+                                    <div class="accordion-inner accordion-inner-inverse">
+
+                                        <form class="form mar-top-10 validate" method="post" id="add-cupom"
+                                              action="[baseUri]/admin/cupom/gerar/">
+
+                                            <p>Criar Cupons</p>
+
+                                            <div class="input-prepend input-append">
+                                                <span class="add-on">Nome do Grupo: </span>
+                                                <input class="span6 required" name="cupom_alfa" id="cupom_alfa" type="text"
+                                                       placeholder="informe um nome para o novo cupom" />
+                                            </div>
+
+                                            <!--
+                                            <div class="input-prepend">
+                                                <span class="add-on">Quantidade de Cupons: </span>
+                                                <input class="span6 numeric required" name="lote_size" id="lote_size" type="text" 
+                                                       placeholder="informe a quantidade de cupons deste grupo" />
+                                            </div>
+                                            -->
+
+                                            <div class="input-prepend">
+                                                <span class="add-on">Validade dos cupons: </span>
+                                                <input class="span6 date datar required" name="cupom_validade" id="cupom_validade" type="text"
+                                                       placeholder="informe a data de validade do grupo" />
+                                            </div>
+
+                                            <div class="input-prepend">
+                                                <span class="add-on">Utilizações por cupons: </span>
+                                                <select name="cupom_limite" id="cupom_limite" class="span6">
+                                                    <option value="1">Uso único - Desativado após a primeira utilização</option>
+                                                    <option value="2">Uso Ilimitado - Até terminar a validade</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="input-prepend input-append">
+                                                <span class="add-on">Desconto % (valor percentual): </span>
+                                                <input class="numeric span6"  maxlength="3" max="3" name="cupom_desconto" id="cupom_desconto" type="text"
+                                                       placeholder="informe o percentual de desconto. Ex: 10" />
+                                            </div>
+
+                                            <div class="input-prepend input-append">
+                                                <span class="add-on">Desconto R$ (valor real): </span>
+                                                <input class="text span6" name="cupom_real" id="cupom_real" type="text"
+                                                       placeholder="informe o percentual de desconto. Ex: 20.00" />
+                                            </div>
+
+
+                                            <div class="center">
+                                                <br /><br />
+                                                <button type="submit" class="btn btn-inverse">Criar Cupom</button>
+                                            </div>
+
+                                            <div class="hide">
+                                                <button type="button" class="btn cancel">Cancelar</button>
+                                            </div>
+
+                                        </form> 
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-group">
+                                <div class="accordion-heading">
+                                    <a class="accordion-toggle panel-link" style="text-align: left !important" data-toggle="collapse" data-parent="#add-categoria" href="#collapseTwo">
+                                        <i class="icon-search icon-white" ></i> <b>Pesquisar Cupom</b>
+                                    </a>
+                                </div>
+                                <div id="collapseTwo" class="accordion-body collapse">
+                                    <div class="accordion-inner accordion-inner-inverse">
+                                        <form class="form mar-top-10" method="post" action="[baseUri]/admin/cupom/busca/">
+                                            <div class="input-prepend">
+                                                <span class="add-on">Código do Cupom: </span>
+                                                <input class="span6" name="cupom_alfa" id="cupom_alfa" required type="text" value="[cupom_id]"
+                                                       placeholder="Código alfanúmerico do cupom" />
+                                                <button type="submit" class="btn">Pesquisar</button>
+                                                <button type="button" class="hide btn cancel">Cancelar</button>
+                                            </div>
+                                        </form> 
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="box-cart">  
+                                <table cellpadding="0" cellspacing="0" border="0" class="table tabler table-striped [showHide]">
+                                    <thead>
+                                        <tr>
+                                            <!--<th class="type-string"><i class="icon-filter icon-white"></i> Lote</th>-->
+                                            <th class="type-string"><i class="icon-filter icon-white"></i> Cupom</th>
+                                            <th class="type-date"><i class="icon-filter icon-white"></i> Validade</th>
+                                            <!--<th class="type-int"><i class="icon-filter icon-white"></i> Cupons</th>-->
+                                            <th class="type-string"><i class="icon-filter icon-white"></i> Desconto R$</th>
+                                            <th class="type-string"><i class="icon-filter icon-white"></i> Desconto %</th>
+                                            <th class="type-string"><i class="icon-filter icon-white"></i> Utilizados</th>
+                                            <th class="type-string"><i class="icon-filter icon-white"></i> Limite</th>
+                                            <th width="100">&nbsp;</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!--{loop:c}-->
+                                        <!--{<tr id="c.cupom_id">}-->
+                                        <!--{<td><p>c.cupom_alfa</p></td>}-->
+                                        <!--{<td><p>c.cupom_validade</p></td>}-->
+                                        <!--{<td><p>c.cupom_real</p></td>}-->
+                                        <!--{<td><p>c.cupom_desconto %</p></td>}-->
+                                        <!--{<td><p>c.cupom_lote</p></td>}-->
+                                        <!--{<td><p>c.cupom_limite</p></td>}-->
+                                        <!--{<td><p>}-->
+                                        <!--{<button class="btn btn-mini btn-danger remove-lote" id="c.cupom_id">}-->
+                                        <!--{<i class="icon-trash icon-white"></i> remover</button></p>}-->                            
+                                        <!--{</td>}-->                            
+                                        <!--{</tr>}-->
+                                        <!--{end:c}-->
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th>&nbsp;</th>
+                                            <th>&nbsp;</th>
+                                            <th>&nbsp;</th>
+                                            <th>&nbsp;</th>
+                                            <th>&nbsp;</th>
+                                            <th>&nbsp;</th>
+                                            <th>&nbsp;</th>
+                                        </tr>                                    
+                                    </tfoot>
+                                </table>
+                                <div class="pagination">
+                                    <ul class="pull-right"><!--{pages}--></ul>
+                                </div>                                    
+                                [msg_pedido]
+                            </div>
+                        </div>                            
+                    </div>                                     
+                </div>
+            </div>
+            <?php require_once 'footer.html'; ?>          
+        </div> <!--end main-->
+        <script src="js/jquery/jquery.price.js" type="text/javascript"></script>        
+        <script src="js/jquery/jquery.mask.js" type="text/javascript"></script>    
+        <script src="js/jquery/stupidtable.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            $("#menu-cupom").addClass('active');
+            $("#cupom-lista").addClass('active');
+            window.onload = function () {
+                [msgOnload]
+            }
+            $('.date').datepicker({autoclose: true, format: 'dd/mm/yyyy'});
+            $(".table").stupidtable();
+        </script>
+        <div class="modal hide fade" id="modal-remove">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h5><img src="images/icons/alert.png" /> Remover Lote de Cupom</h5>
+            </div>
+            <div class="modal-body">
+                <p>Você está prestes a remover um lote inteiro de cupons!</p>
+                <p>Deseja realmente prosseguir?</p>
+            </div>
+            <div class="modal-footer">
+                <a href="javascript:void(0);" onclick="$('#modal-remove').modal('hide')" class="btn btn-small">Cancelar</a>
+                <a href="javascript:void(0);" id="btn-remove" class="btn btn-small btn-danger">Confirmar Remoção</a>
+            </div>
+        </div>      
+    </body>
+</html>

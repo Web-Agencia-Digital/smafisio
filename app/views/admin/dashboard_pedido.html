@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>[config_site_title] | Painel Administrativo</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script src="js/jquery/jquery-1.8.3.min.js" type="text/javascript"></script>
+        <script src="js/jquery/jquery-ui-1.9.2.js" type="text/javascript"></script>
+        <script src="js/admin/main.js" type="text/javascript"></script>
+        <script src="js/jquery/bootstrap/js/bootstrap.js" type="text/javascript"></script>
+        <link href="js/jquery/bootstrap/css/bootstrap.css" rel="stylesheet" />
+        <link href="js/jquery/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" />
+        <link href="css/admin/main.css" rel="stylesheet" />
+        <script src="js/jquery/jquery.price.js" type="text/javascript"></script>        
+        <script src="js/jquery/jquery.mask.js" type="text/javascript"></script>    
+        <script src="js/jquery/stupidtable.js" type="text/javascript"></script>
+        <script src="js/admin/cliente.js" type="text/javascript"></script>        
+    </head>
+    <body>
+        <div id="main">
+            <?php require_once 'menu_login.html'; ?>
+            <div class="row-fluid">
+                <div class="span2 pull-left">
+                    <?php require_once 'menu.html'; ?>
+                </div>   
+                <div class="span10 pull-right" id="sright">
+                    <div class="row-fluid">
+                        <div class="panel">
+                            <div class="title-grid-inverse">
+                                <i class="icon-shopping-cart icon-white"></i>  <b>últimos Pedidos Lançados</b>
+                            </div>
+                            <div class="box-cart">  
+                                <table cellpadding="0" cellspacing="0" border="0" class="table tabler table-striped [showHide]">
+                                    <thead>
+                                        <tr>
+                                            <th width="40">Pedido</th>
+                                            <th width="90">Data</th>
+                                            <th>Cliente</th>
+                                            <th>Status</th>
+                                            <th>Valor</th>
+                                            <th width="75">&nbsp;</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!--{loop:cart}-->
+                                        <!--{<tr id="cart.lista_id">}-->
+                                        <!--{<td><p>cart.pedido_id</p></td>}-->
+                                        <!--{<td><p>cart.pedido_data</p></td>}-->
+                                        <!--{<td><p>cart.cliente_nome</p></td>}-->
+                                        <!--{<td><p><img src="images/icons/cart.staticon" title="cart.pedido_status" class="tips-top pointer" /></p></td>}-->                          
+                                        <!--{<td><p>R$ cart.pedido_total_frete</p></td>}-->                            
+                                        <!--{<td><p><a class="btn btn-mini" href="[baseUri]/admin/pedido/detalhe/cart.pedido_id/">}-->
+                                        <!--{<i class="icon-zoom-in"></i> detalhes</a></p>}-->                            
+                                        <!--{</tr>}-->
+                                        <!--{end:cart}-->
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th>&nbsp;</th>
+                                            <th>&nbsp;</th>
+                                            <th>&nbsp;</th>
+                                            <th>&nbsp;</th>
+                                            <th>&nbsp;</th>
+                                            <th>&nbsp;</th>
+                                        </tr>                                    
+                                    </tfoot>
+                                </table>
+                                <div class="pagination">
+                                    <ul class="pull-right">
+                                        <!--{pages}-->
+                                    </ul>
+                                </div>                                    
+                                [msg_pedido]
+                            </div>
+
+                        </div>                            
+                    </div>                                     
+                </div>
+            </div>
+            <?php require_once 'footer.html'; ?>          
+        </div> <!--end main-->
+        <div class="modal hide fade" id="modal-remove">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h5><img src="images/icons/alert.png" /> Remover Cliente</h5>
+            </div>
+            <div class="modal-body">
+                <p>Você está prestes a remover um cliente e todos os seus pedidos!</p>
+                <p>Deseja realmente prosseguir?</p>
+            </div>
+            <div class="modal-footer">
+                <a href="javascript:void(0);" onclick="$('#modal-remove').modal('hide')" class="btn btn-small">Cancelar</a>
+                <a href="javascript:void(0);" id="btn-remove" class="btn btn-small btn-danger">Confirmar Remoção</a>
+            </div>
+        </div>      
+        <script type="text/javascript">
+            $("#menu-dash").addClass('active');
+            $("#dash-pedido").addClass('active');
+            window.onload = function () {
+                [msgOnload]
+            }
+        </script>
+    </body>
+</html>

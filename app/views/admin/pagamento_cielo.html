@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>[config_site_title] | Painel Administrativo</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script src="js/jquery/jquery-1.8.3.min.js" type="text/javascript"></script>
+        <script src="js/jquery/jquery-ui-1.9.2.js" type="text/javascript"></script>
+        <script src="js/admin/main.js" type="text/javascript"></script>
+        <script src="js/jquery/bootstrap/js/bootstrap.js" type="text/javascript"></script>
+        <link href="js/jquery/bootstrap/css/bootstrap.css" rel="stylesheet" />
+        <link href="js/jquery/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" />
+        <link href="css/admin/main.css" rel="stylesheet" />
+        <script src="js/jquery/jquery.price.js" type="text/javascript"></script>        
+        <script src="js/jquery/jquery.mask.js" type="text/javascript"></script>        
+    </head>
+    <body>
+        <div id="main">
+            <?php require_once 'menu_login.html'; ?>
+            <div class="row-fluid">
+                <div class="span2 pull-left">
+                    <?php require_once 'menu.html'; ?>
+                </div> 
+                <div class="span10 pull-right" id="sright">
+                    <div class="row-fluid">
+                        <div class="panel panel-box">
+                            <div class="title-grid-inverse">
+                                <i class="icon-cog icon-white"></i>  <b>Cielo - Parâmetros de Pagamento</b>
+                            </div>
+
+
+                            <form name="f-frete" id="f-frete" class="form mar-top-10" method="post" onSubmit="return valida()"
+                                  action="[baseUri]/admin/pagamento/atualizar/cielo/" style="padding: 10px">
+
+                                <p>
+                                    <strong>
+                                    ATENÇÃO! <br>ESSAS REGRAS APLICAM-SE APENAS NOS PAGAMENTOS REALIZADOS ATRAVÉS DA CIELO
+                                    </strong>
+                                </p>
+
+                                <div class="input-prepend">
+                                    <span class="add-on">Filiação Número: </span>
+                                    <input class="span6" required name="pay_user" id="pay_user" type="text" value="[pay_user]" placeholder="Número de filiação junto à Cielo" />
+                                </div>
+                                <div class="input-prepend">
+                                    <span class="add-on">Filiação Chave: </span>
+                                    <input class="span6" required name="pay_key" id="pay_key" type="text" value="[pay_key]" placeholder="Chave de filiação fornecida pela Cielo" />
+                                </div>
+                                <div class="input-prepend">
+                                    <span class="add-on">Percentual de Juros (%): </span>
+                                    <input class="span6" name="pay_fator_juros" id="pay_fator_juros" type="text" value="[pay_fator_juros]" placeholder="Usado para calcular os juros de parcelamento" />
+                                </div>  
+
+                                <div class="input-prepend">
+                                    <span class="add-on">Desconto à vista (%): </span>
+                                    <input class="span6" name="pay_c2" id="pay_c2" type="text" value="[pay_c2]" placeholder="Desconto para pagamento à vista (1x)" />
+                                </div>  
+                                <div class="input-prepend hide">
+                                    <span class="add-on">Bandeiras: </span>
+                                    <input class="span6" name="pay_c4" id="pay_c4" type="text" value="[pay_c4]" 
+                                           placeholder="Informe as bandeiras separadas por vírgula" />
+                                </div>  
+
+                                <div class="input-prepend">
+                                    <span class="add-on">Parcelar em até: </span>
+                                    <select name="pay_c3" id="pay_c3" class="span6">
+                                        <option value="1">1x</option>
+                                        <option value="2">2x</option>
+                                        <option value="3">3x</option>
+                                        <option value="4">4x</option>
+                                        <option value="5">5x</option>
+                                        <option value="6">6x</option>
+                                        <option value="7">7x</option>
+                                        <option value="8">8x</option>
+                                        <option value="9">9x</option>
+                                        <option value="10">10x</option>
+                                        <option value="11">11x</option>
+                                        <option value="12">12x</option>
+                                        <option value="13">13x</option>
+                                        <option value="14">14x</option>
+                                        <option value="15">15x</option>
+                                        <option value="16">16x</option>
+                                        <option value="17">17x</option>
+                                        <option value="18">18x</option>
+                                    </select>
+                                </div>  
+
+                                <div class="input-prepend">
+                                    <span class="add-on">Parcelas s/ juros: </span>
+                                    <select name="pay_c1" id="pay_c1" class="span6">
+                                        <option value="1">1x s/ juros</option>
+                                        <option value="2">2x s/ juros</option>
+                                        <option value="3">3x s/ juros</option>
+                                        <option value="4">4x s/ juros</option>
+                                        <option value="5">5x s/ juros</option>
+                                        <option value="6">6x s/ juros</option>
+                                        <option value="7">7x s/ juros</option>
+                                        <option value="8">8x s/ juros</option>
+                                        <option value="9">9x s/ juros</option>
+                                        <option value="10">10x s/ juros</option>
+                                        <option value="11">11x s/ juros</option>
+                                        <option value="12">12x s/ juros</option>
+                                        <option value="13">13x s/ juros</option>
+                                        <option value="14">14x s/ juros</option>
+                                        <option value="15">15x s/ juros</option>
+                                        <option value="16">16x s/ juros</option>
+                                        <option value="17">17x s/ juros</option>
+                                        <option value="18">18x s/ juros</option>
+                                    </select>
+                                </div>      
+                                
+                                
+
+                                <div class="input-prepend">
+                                    <span class="add-on">Parcelamento: </span>
+                                    <select name="pay_c6" id="pay_c6" class="span6">
+                                        <option value="2">Loja - Você paga as taxas de parcelamento</option>
+                                        <option value="3">Administradora - O cliente paga as taxas de parcelamento</option>
+                                    </select>
+                                </div> 
+                                
+                                
+                                <div class="input-prepend">
+                                    <span class="add-on">Valor Mínimo da Parcela: </span>
+                                    <input class="span6" name="pay_c5" id="pay_c4" type="text" value="[pay_c5]" 
+                                           placeholder="Informe o valor mínimo para parcelamento" />
+                                </div>  
+
+                                
+                                <div class="input-prepend">
+                                    <span class="add-on">Ambiente: </span>
+                                    <select name="pay_pass" id="pay_pass" class="span6">
+                                        <option value="2">Homologação (teste)</option>
+                                        <option value="1">Produção</option>
+                                    </select>
+                                </div>   
+                                <div class="input-prepend">
+                                    <span class="add-on">Status do Módulo: </span>
+                                    <select name="pay_status" id="pay_status" class="span6">
+                                        <option value="1">Habilitado</option>
+                                        <option value="2">Desabilitado</option>
+                                    </select>
+                                </div>                                
+                                <br />
+                                <input class="hide" name="pay_id" id="pay_id" type="hidden" value="[pay_id]" />
+                                <button type="submit" class="btn" id="btn-add"><i class="icon-edit"></i> Atualizar Dados Cielo</button>
+                                <br />
+                                <div id="result"></div>
+                                <br />
+                            </form>
+                        </div>
+                    </div>                                     
+                </div>
+            </div>
+            <?php require_once 'footer.html'; ?>         
+        </div> <!--end main-->
+        <script type="text/javascript">
+            $("#menu-pagamento").addClass('active');
+            $("#pagamento-cielo").addClass('active');
+            $('#pay_status').val('[pay_status]');
+            $('#pay_pass').val('[pay_pass]');
+            $('#pay_c3').val('[pay_c3]');
+            $('#pay_c1').val('[pay_c1]');
+            $('#pay_c2').val('[pay_c2]');
+            $('#pay_c6').val('[pay_c6]');
+            window.onload = function () {
+                [msgOnload]
+            }
+        </script>
+    </body>
+</html>

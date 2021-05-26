@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>[config_site_title] | Painel Administrativo</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script src="js/jquery/jquery-1.8.3.min.js" type="text/javascript"></script>
+        <script src="js/jquery/jquery-ui-1.9.2.js" type="text/javascript"></script>
+        <script src="js/jquery/bootstrap/js/bootstrap.js" type="text/javascript"></script>
+        <script src="js/admin/main.js" type="text/javascript"></script>
+        <script src="js/admin/depoimento.js" type="text/javascript"></script>
+        <link href="js/jquery/bootstrap/css/bootstrap.css" rel="stylesheet" />        
+        <link href="css/admin/main.css" rel="stylesheet" />
+        <link href="css/default/fakeinput.css" rel="stylesheet" /> 
+    </head>
+    <body>
+        <div id="main">
+            <?php require_once 'menu_login.html'; ?>
+            <div class="row-fluid">
+                <div class="span2 pull-left">
+                    <?php require_once 'menu.html'; ?>
+                </div>                 
+                <div class="span10 pull-right" id="sright">
+                    <div class="row-fluid">
+                        <div class="panel panel-box">
+                            <div class="title-grid-inverse">
+                                <i class="icon-pencil icon-white"></i>  <b>Editar Depoimento</b>
+                            </div>                            
+                            <div class="box-cart" style="padding:10px;">  
+                                <form name="f-pagina" id="f-pagina" class="form mar-top-10" method="post" 
+                                      enctype="multipart/form-data"
+                                      action="[baseUri]/admin/depoimento/atualizar/[depoimento_id]/">
+                                    
+
+                                    <div class="for-slide-top">
+                                        <p class="well well-small mar-top-5" style="color: #333;margin-bottom: 3px;"><i class="icon-text-width"></i> 
+                                            <strong>Nome:</strong>
+                                        </p>                                        
+                                        <input class="span6 ucfirst w-all" name="depoimento_nome" id="depoimento_nome" value="[depoimento_nome]"
+                                               type="text" placeholder="informe o nome"/>
+                                    </div>
+                                    
+                                    <!--
+                                    <p class="well well-small" style="color: #333;margin-bottom: 0px;"><i class="icon-picture"></i> 
+                                        <strong>Foto Atual:</strong>
+                                    </p>
+                                    <img src="[baseUri]/thumb/cliente/[depoimento_thumb]/120/120/crop/" class="mar-top-5"/>
+                                    <div class="fakeipt mar-top-10">
+                                        <p class="well well-small" style="color: #333;margin-bottom: 0px;"><i class="icon-picture"></i> 
+                                            <strong>Foto:</strong>
+                                        </p>
+                                        <div class="uploader black">
+                                            <input type="text" class="filename" readonly="readonly"/>
+                                            <input type="button" name="file" id="file" class="button" value="Selecionar"/>
+                                            <input type="file" name="filedata" size="30"/>
+                                        </div>
+                                    </div>
+                                    -->
+
+                                    <div class="for-slide-top">
+                                        <p class="well well-small mar-top-10" style="color: #333;margin-bottom: 5px;"><i class="icon-pencil"></i> 
+                                            <strong>Depoimento:</strong>
+                                        </p>                                         
+                                        <textarea rows="5" class="w-all" name="depoimento_msg" id="depoimento_msg"  placeholder="informe o depoimento">[depoimento_msg]</textarea>
+                                    </div>
+
+                                    <button type="submit" class="btn mar-top-10"><i class="icon-refresh"></i> Atualizar</button>
+                                </form> 
+                            </div>
+                        </div>
+                    </div>                    
+                </div>
+
+            <?php require_once 'footer.html'; ?>         
+            </div><!--end row-fluid-->             
+        </div> <!--end main-->
+        <script type="text/javascript">
+            $("#menu-cliente").addClass('active');
+            $("#cliente-depoimento").addClass('active');
+            window.onload = function () {
+                [msgOnload]
+            }
+        </script>       
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('#depoimento_local').val('[depoimento_local]');
+                if ($('#depoimento_local').val() == 2) {
+                    $('.for-slide-top').hide();
+                } else {
+                    $('.for-slide-top').show();
+                }
+                $("input[type=file]").change(function () {
+                    $(this).parents(".uploader").find(".filename").val($(this).val());
+                });
+                $("input[type=file]").each(function () {
+                    if ($(this).val() == "") {
+                        $(this).parents(".uploader").find(".filename").val("Nenhum arquivo selecionado...");
+                    }
+                });
+            });
+        </script>        
+    </body>
+</html>

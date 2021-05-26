@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>[config_site_title] | Painel Administrativo</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link href="js/jquery/bootstrap/css/bootstrap.css" rel="stylesheet" />
+        <link href="js/jquery/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" />
+        <link href="css/admin/main.css" rel="stylesheet" />
+        <script src="js/jquery/jquery-1.8.3.min.js" type="text/javascript"></script>
+        <script src="js/jquery/bootstrap/js/bootstrap.js" type="text/javascript"></script>		
+        <script src="js/jquery/jquery-ui-1.9.2.js" type="text/javascript"></script>
+        <script src="js/admin/main.js" type="text/javascript"></script>
+    </head>
+    <body>
+        <div id="main">
+            <?php require_once 'menu_login.html'; ?>
+            <div class="row-fluid">
+                <div class="span2 pull-left">
+                    <?php require_once 'menu.html'; ?>
+                </div>                
+                <div class="span10 pull-right" id="sright">
+                    <div class="row-fluid">
+                        <div class="panel">
+                            <div class="title-grid-inverse">
+                                <i class="icon-cog icon-white"></i>  <b>Dashboard</b>
+                            </div>
+                            <p class="font-black alert alert-success">Olá [user_name], seja bem-vindo ao painel administrativo [config_site_title]!</p>
+                        </div>  
+                        <div class="panel">
+                            <div class="title-grid-inverse">
+                                <i class="icon-cog icon-white"></i>  <b>Atualizações do Sistema</b>
+                            </div>
+                            <p class="font-black alert alert-success">
+                                [versao]
+                            </p>
+                        </div>
+                    </div>                                     
+                </div>
+            </div>
+            <?php require_once 'footer.html'; ?>         
+        </div> <!--end main-->
+        <script type="text/javascript">
+            $("#menu-dash").addClass('active');
+            $("#dash-home").addClass('active');
+            window.onload = function () {
+                [msgOnload]
+            }
+        </script>
+    </body>
+</html>

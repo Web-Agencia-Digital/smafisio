@@ -1,0 +1,44 @@
+
+RewriteEngine On
+
+#SSL descomente as linhas abaixo para forçar HTTPS na loja
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+RewriteCond %{HTTP_HOST} !^www\.
+RewriteRule ^(.*)$ https://www.%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+
+# Diretorios extras
+RewriteRule ^payment - [L,NC]
+RewriteRule ^app/payment - [L,NC]
+RewriteRule ^soon - [L,NC]
+RewriteRule ^ioncube - [L,NC]
+
+#padrozinar diretorio /admin
+RewriteRule ^admin/([a-zA-Z0-9-_/]+)/?$ ./app.php?dir=admin&route=$1 [L,QSA]
+RewriteRule ^admin/([a-zA-Z0-9-_/]+)?$ ./app.php?dir=admin&route=index [L,QSA]
+RewriteRule ^admin([a-zA-Z0-9-_/]+)?$ ./app.php?dir=admin&route=index [L,QSA]
+
+#midias
+RewriteCond $1 !^(css|js|img|fotos|slide)/
+
+#Diretorios da base
+RewriteRule ^([a-zA-Z0-9-_/]+)/?$ ./app.php?route=$1 [L,QSA]
+RewriteRule ^([a-zA-Z0-9-_/]+)?$ ./app.php?route=index [L,QSA]
+
+
+#Pagina 404
+ErrorDocument 404 /404.php 
+#Header set Access-Control-Allow-Origin "*"
+
+
+<IfModule mime_module>
+ AddHandler application/x-httpd-ea-php72 .php .php7 .phtml
+ </IfModule>
+
+# php -- BEGIN cPanel-generated handler, do not edit
+# Defina o pacote “ea-php72” como a linguagem padrão de programação “PHP”.
+<IfModule mime_module>
+  AddHandler application/x-httpd-ea-php72 .php .php7 .phtml
+</IfModule>
+# php -- END cPanel-generated handler, do not edit

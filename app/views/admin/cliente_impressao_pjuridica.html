@@ -1,0 +1,91 @@
+<html>
+    <head>
+        <title>[config_site_title]</title>
+        <link href="js/jquery/bootstrap-3.3.6/css/bootstrap.css" rel="stylesheet" type="text/css" />
+        <style type="text/css">
+            .invoice-title h2, .invoice-title h3 {
+                display: inline-block;
+            }
+            .table > tbody > tr > .no-line {
+                border-top: none;
+            }
+            .table > thead > tr > .no-line {
+                border-bottom: none;
+            }
+            .table > tbody > tr > .thick-line {
+                border-top: 2px solid;
+            }
+        </style>
+    </head>
+    <body>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-md-12">
+                    <div class="invoice-title">
+                        <h2>[cliente_nome]</h2>
+                        <h3 class="pull-right"><br> <small>email: [cliente_email]</small></h3>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <address>
+                                <strong>Razão Social</strong><br>
+                                [cliente_nome]<br>
+                            </address>
+                            <address>
+                                <strong>Responsável</strong><br>
+                                [cliente_contato]<br>
+                            </address>
+                            <address>
+                                <strong>CNPJ</strong><br>
+                                [cliente_cnpj]<br>
+                            </address>
+                            <address>
+                                <strong>I.E</strong><br>
+                                [cliente_ie]<br>
+                            </address>
+
+                         
+                        </div>
+                        <div class="col-xs-6 text-right">
+                            <address>
+                                <strong>Contatos</strong><br> <br>                                
+                                <strong>Telefone</strong><br>
+                                [cliente_telefone]<br><br>
+
+                                <strong>Celular</strong><br>
+                                [cliente_celular]<br>
+
+                                <strong>Email</strong><br>
+                                [cliente_email]<br>
+                            </address>  
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-8">
+                            <strong>Endereços: </strong><br><br>
+                            <!--{loop:addr}-->
+                           <!--{<span class="text-uppercase">addr.endereco_title </span><br>}-->
+                            <!--{Endereço: addr.endereco_rua, addr.endereco_num }-->
+                           <!--{ addr.endereco_complemento - }-->
+                            <!--{addr.endereco_bairro - }-->
+                           <!--{ addr.endereco_cidade /  addr.endereco_uf <br> }-->
+                            <!--{Cep: addr.endereco_cep <br> }-->
+                           <!--{ <br><br> }-->
+                            <!--{end:addr}--> 
+                            
+                        </div>
+                        <div class="col-xs-4 text-right">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <script type="text/javascript">
+           window.print();
+        </script>
+    </body>
+</html>
